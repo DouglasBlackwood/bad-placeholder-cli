@@ -59,7 +59,7 @@ var download = function (url, dest) {
 var filename = function (iterator) {
   'use strict';
 
-  return 'spaceholder_' + program.size + '_' + random({length: 4}) + iterator + random({length: 4}) + '.jpg'
+  return 'placeholder_' + program.size + '_' + random({length: 4}) + iterator + random({length: 4}) + '.jpg'
 }
 
 for (i = 1; i <= program.number; i++) {

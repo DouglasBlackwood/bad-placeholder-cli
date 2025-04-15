@@ -3,7 +3,7 @@
   "version": "1.11.0",
   "description": "Download placeholder images from public domain sources blazingly fast",
   "bin": {
-    "spaceholder": "index.js"
+    "bad-placeholder": "index.js"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha test"

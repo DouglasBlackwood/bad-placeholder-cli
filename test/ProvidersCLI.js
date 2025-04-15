@@ -7,11 +7,11 @@ var Image = require('../image/Image');
 Object.keys(Image.providers).forEach(function (provider) {
   'use strict';
 
-  describe('CLI, Provider: ' + provider + '. spaceholder -p ' + provider, function () {
+  describe('CLI, Provider: ' + provider + '. bad-placeholder -p ' + provider, function () {
     'use strict';
 
     before(function (done) {
-      helpers.deleteSpaceholders()
+      helpers.deletePlaceholders()
         .then(function (response) {
           done();
         });
@@ -32,16 +32,16 @@ Object.keys(Image.providers).forEach(function (provider) {
     });
 
     it('should generate one image from specified provider (' + provider + ')', function () {
-      expect(helpers.getSpaceholders().length).to.be.equal(1);
+      expect(helpers.getPlaceholders().length).to.be.equal(1);
     });
 
     it('should have default dimensions', function () {
-      var dimensions = helpers.getDimensions(helpers.getSpaceholders()[0]);
+      var dimensions = helpers.getDimensions(helpers.getPlaceholders()[0]);
       expect(dimensions).to.be.equal('1024x768');
     });
 
     after(function (done) {
-      helpers.deleteSpaceholders()
+      helpers.deletePlaceholders()
         .then(function (response) {
           done();
         });

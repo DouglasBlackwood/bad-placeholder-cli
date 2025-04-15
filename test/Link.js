@@ -7,7 +7,7 @@ describe('Symlink', function () {
   'use strict';
 
   before(function (done) {
-    helpers.deleteSpaceholders()
+    helpers.deletePlaceholders()
       .then(function (response) {
         done();
       });
@@ -30,7 +30,7 @@ describe('Symlink', function () {
   var result2;
 
   before(function (done) {
-    execa.shell('spaceholder')
+    execa.shell('bad-placeholder')
       .then(function (response) {
         result2 = response.stdout;
         done();
@@ -42,7 +42,7 @@ describe('Symlink', function () {
   });
 
   it('should generate one image with default dimensions', function () {
-    var dimensions = helpers.getDimensions(helpers.getSpaceholders()[0]);
+    var dimensions = helpers.getDimensions(helpers.getPlaceholders()[0]);
     expect(dimensions).to.be.equal('1024x768');
   });
 });

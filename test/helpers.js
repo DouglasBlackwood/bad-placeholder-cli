@@ -5,11 +5,11 @@ module.exports = {
     return fs.readdirSync('./');
   },
 
-  getSpaceholders: function () {
+  getPlaceholders: function () {
     var files = this.getRootFiles();
 
     return files.filter(function (filename) {
-      if (filename.indexOf('spaceholder_') !== -1) {
+      if (filename.indexOf('placeholder_') !== -1) {
         return filename
       }
     });
@@ -19,13 +19,13 @@ module.exports = {
     return JSON.parse(fs.readFileSync('./package.json').toString());
   },
 
-  deleteSpaceholders: function () {
-    var spaceholders = this.getSpaceholders();
-    var count = spaceholders.length;
+  deletePlaceholders: function () {
+    var placeholders = this.getPlaceholders();
+    var count = placeholders.length;
 
     return new Promise(function (resolve, reject) {
       if (count) {
-        spaceholders.forEach(function (filename) {
+        placeholders.forEach(function (filename) {
           fs.unlinkSync(filename);
           count--;
 

@@ -4,11 +4,11 @@ var execa = require('execa');
 var helpers = require('./helpers');
 var Image = require('../image/Image');
 
-describe('CLI: spaceholder', function () {
+describe('CLI: bad-placeholder', function () {
   'use strict';
 
   before(function (done) {
-    helpers.deleteSpaceholders()
+    helpers.deletePlaceholders()
       .then(function (response) {
         done();
       });
@@ -29,16 +29,16 @@ describe('CLI: spaceholder', function () {
   });
 
   it('should generate one image with default dimensions', function () {
-    var dimensions = helpers.getDimensions(helpers.getSpaceholders()[0]);
+    var dimensions = helpers.getDimensions(helpers.getPlaceholders()[0]);
     expect(dimensions).to.be.equal('1024x768');
   });
 });
 
-describe('CLI: spaceholder -n 3', function () {
+describe('CLI: bad-placeholder -n 3', function () {
   'use strict';
 
   before(function (done) {
-    helpers.deleteSpaceholders()
+    helpers.deletePlaceholders()
       .then(function (response) {
         done();
       });
@@ -59,20 +59,20 @@ describe('CLI: spaceholder -n 3', function () {
   });
 
   it('should generate three images', function () {
-    expect(helpers.getSpaceholders().length).to.be.equal(3);
+    expect(helpers.getPlaceholders().length).to.be.equal(3);
   });
 
   it('should have default dimensions', function () {
-    var dimensions = helpers.getDimensions(helpers.getSpaceholders()[Math.floor(Math.random() * 2) + 0]);
+    var dimensions = helpers.getDimensions(helpers.getPlaceholders()[Math.floor(Math.random() * 2) + 0]);
     expect(dimensions).to.be.equal('1024x768');
   });
 });
 
-describe('CLI: spaceholder -s 100x100', function () {
+describe('CLI: bad-placeholder -s 100x100', function () {
   'use strict';
 
   before(function (done) {
-    helpers.deleteSpaceholders()
+    helpers.deletePlaceholders()
       .then(function (response) {
         done();
       });
@@ -93,11 +93,11 @@ describe('CLI: spaceholder -s 100x100', function () {
   });
 
   it('should generate one image', function () {
-    expect(helpers.getSpaceholders().length).to.be.equal(1);
+    expect(helpers.getPlaceholders().length).to.be.equal(1);
   });
 
   it('should be 100x100', function () {
-    var dimensions = helpers.getDimensions(helpers.getSpaceholders()[0]);
+    var dimensions = helpers.getDimensions(helpers.getPlaceholders()[0]);
     expect(dimensions).to.be.equal('100x100');
   });
 });
