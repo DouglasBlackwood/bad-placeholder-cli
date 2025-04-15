@@ -1,17 +1,12 @@
 {
-  "name": "spaceholder",
+  "name": "bad-placeholder-cli",
   "version": "1.11.0",
   "description": "Download placeholder images from public domain sources blazingly fast",
-  "preferGlobal": true,
   "bin": {
     "spaceholder": "index.js"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ecrmnn/spaceholder"
   },
   "keywords": [
     "placeholder",
@@ -27,31 +22,14 @@
     "fake images",
     "fakeimg"
   ],
-  "author": {
-    "name": "Daniel Eckermann",
-    "email": "danieleckermann@gmail.com",
-    "url": "http://danieleckermann.com"
-  },
-  "contributors": [
-    {
-      "name": "Christoffer Martinsen",
-      "email": "christoffermartinsen@gmail.com",
-      "url": "http://github.com/mrtnsn"
-    }
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ecrmnn/spaceholder/issues"
-  },
-  "homepage": "https://github.com/ecrmnn/spaceholder",
   "dependencies": {
     "commander": "^2.8.1",
     "follow-redirects": "^1.15.0",
     "random-string": "^0.1.2"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
-    "execa": "^0.2.2",
-    "mocha": "^2.2.5"
+    "chai": "^5.2.0",
+    "execa": "^1.0.0",
+    "mocha": "^11.1.0"
   }
 }
