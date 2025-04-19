@@ -1,8 +1,30 @@
 module.exports = {
   providers: {
-    DummyImage: require('./providers/DummyImage'),
-    LoremPicsum: require('./providers/LoremPicsum'),
-    FakeImg: require('./providers/FakeImg')
+    DummyImage: {
+      getImageUrl: function (size) {
+        'use strict';
+    
+        return 'https://dummyimage.com/' + size + '/000/fff';
+      }
+    },
+    LoremPicsum: {
+      getImageUrl: function (size) {
+        'use strict';
+    
+        var pieces = size.split('x');
+    
+        return 'https://picsum.photos/' + pieces[0] + '/' + pieces[1] + '/?random';
+      }
+    },
+    FakeImg: {
+      getImageUrl: function (size) {
+        'use strict';
+    
+        var pieces = size.split('x');
+    
+        return 'https://fakeimg.pl/' + pieces[0] + 'x' + pieces[1] + '/384f66/ecf0f1/?text=Spaceholder&font=lobster';
+      }
+    }
   },
 
   provider: 'random',
