@@ -1,57 +1,46 @@
 module.exports = {
-  providers: {
+  list: {
+    // DummyImage
     DummyImage: {
-      getImageUrl: function (size) {
+      getImgUrl: function (s) {
         'use strict';
-    
-        return 'https://dummyimage.com/' + size + '/000/fff';
+        return 'https://dummyimage.com/'+s+'/000/fff';
       }
     },
+    // LoremPicsum
     LoremPicsum: {
-      getImageUrl: function (size) {
+      getImgUrl: function (s) {
         'use strict';
-    
-        var pieces = size.split('x');
-    
-        return 'https://picsum.photos/' + pieces[0] + '/' + pieces[1] + '/?random';
+        var s2=s.split('x');
+        return 'https://picsum.photos/'+s2[0]+'/'+s2[1]+'/?random';
       }
     },
+    // FakeImg
     FakeImg: {
-      getImageUrl: function (size) {
+      getImgUrl: function (s) {
         'use strict';
-    
-        var pieces = size.split('x');
-    
-        return 'https://fakeimg.pl/' + pieces[0] + 'x' + pieces[1] + '/384f66/ecf0f1/?text=Spaceholder&font=lobster';
+        var s2=s.split('x');
+        return 'https://fakeimg.pl/'+s2[0]+'x'+s2[1]+'/384f66/ecf0f1/?text=Spaceholder&font=lobster';
       }
     }
   },
-
-  provider: 'random',
-
-  getProvider: function () {
+  prvd: 'random',
+  getPrvd: function () {
     'use strict';
-
-    if (this.provider === 'random') {
-
-      var providers = Object.keys(this.providers);
-      var index = Math.floor(Math.random() * providers.length);
-
-      return providers[index];
+    // Select random image provider
+    if (this.prvd==='random') {
+      var l=Object.keys(this.list);
+      var i=Math.floor(Math.random()*l.length);
+      return l[i];
     }
-
-    return this.provider;
+    return this.prvd;
   },
-
-  setProvider: function (provider) {
+  setPrvd: function (prvd) {
     'use strict';
-
-    this.provider = provider;
+    this.prvd = prvd;
   },
-
-  getImageUrl: function (size) {
+  getImgUrl: function (size) {
     'use strict';
-
-    return this.providers[this.getProvider()].getImageUrl(size);
+    return this.list[this.getPrvd()].getImgUrl(size);
   }
 };
