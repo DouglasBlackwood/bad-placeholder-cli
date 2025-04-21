@@ -4,7 +4,7 @@ var execa = require('execa');
 var helpers = require('./helpers');
 var Image = require('../image/Image');
 
-describe('CLI: bad-placeholder', function () {
+describe('Symlink', function () {
   'use strict';
 
   before(function (done) {
@@ -17,9 +17,23 @@ describe('CLI: bad-placeholder', function () {
   var result;
 
   before(function (done) {
-    execa.shell('node ./index.js')
+    execa.shell('npm link')
       .then(function (response) {
         result = response.stdout;
+        done();
+      })
+      .catch(function (error) {
+        console.log(error);
+        done();
+      });
+  });
+
+  var result2;
+
+  before(function (done) {
+    execa.shell('bad-placeholder')
+      .then(function (response) {
+        result2 = response.stdout;
         done();
       })
       .catch(function (error) {
@@ -34,7 +48,7 @@ describe('CLI: bad-placeholder', function () {
   });
 });
 
-describe('CLI: bad-placeholder -n 3', function () {
+describe('bad-placeholder -n 3', function () {
   'use strict';
 
   before(function (done) {
@@ -68,7 +82,7 @@ describe('CLI: bad-placeholder -n 3', function () {
   });
 });
 
-describe('CLI: bad-placeholder -s 100x100', function () {
+describe('bad-placeholder -s 100x100', function () {
   'use strict';
 
   before(function (done) {
@@ -102,44 +116,47 @@ describe('CLI: bad-placeholder -s 100x100', function () {
   });
 });
 
-describe('CLI: Usage and information', function () {
+for (const provider of ["DummyImage", "LoremPicsum", "FakeImg"]) {
   'use strict';
 
-  var result;
+  describe('bad-placeholder -p ' + provider, function () {
+    'use strict';
 
-  before(function (done) {
-    execa.shell('node ./index.js -v')
-      .then(function (response) {
-        result = response.stdout;
-        done();
-      })
-      .catch(function (error) {
-        console.log(error);
-        done();
-      });
-  });
+    before(function (done) {
+      helpers.deletePlaceholders()
+        .then(function (response) {
+          done();
+        });
+    });
 
-  it('should return the same version as package.json', function () {
-    expect(result).to.be.equal(helpers.getPackageJson().version);
-  });
+    var result;
 
-  var result2;
+    before(function (done) {
+      execa.shell('node ./index.js -p ' + provider)
+        .then(function (response) {
+          result = response.stdout;
+          done();
+        })
+        .catch(function (error) {
+          console.log(error);
+          done();
+        });
+    });
 
-  before(function (done) {
-    execa.shell('node ./index.js -h')
-      .then(function (response) {
-        result2 = response.stdout;
-        done();
-      })
-      .catch(function (error) {
-        console.log(error);
-        done();
-      });
-  });
+    it('should generate one image from specified provider (' + provider + ')', function () {
+      expect(helpers.getPlaceholders().length).to.be.equal(1);
+    });
 
-  Object.keys(Image.providers).forEach(function (provider) {
-    it('help should contain all providers (' + provider + ')', function () {
-      expect(result2.indexOf(provider)).not.to.be.equal(-1);
+    it('should have default dimensions', function () {
+      var dimensions = helpers.getDimensions(helpers.getPlaceholders()[0]);
+      expect(dimensions).to.be.equal('1024x768');
+    });
+
+    after(function (done) {
+      helpers.deletePlaceholders()
+        .then(function (response) {
+          done();
+        });
     });
   });
-});
+};

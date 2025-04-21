@@ -15,10 +15,6 @@ module.exports = {
     });
   },
 
-  getPackageJson: function () {
-    return JSON.parse(fs.readFileSync('./package.json').toString());
-  },
-
   deletePlaceholders: function () {
     var placeholders = this.getPlaceholders();
     var count = placeholders.length;
