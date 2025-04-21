@@ -2,7 +2,6 @@ var chai = require('chai');
 var expect = require('chai').expect;
 var execa = require('execa');
 var helpers = require('./helpers');
-var Image = require('../image/Image');
 
 describe('Symlink', function () {
   'use strict';

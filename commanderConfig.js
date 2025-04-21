@@ -1,6 +1,6 @@
 var fs = require('fs');
 var program = require('commander');
-var Image = require('./image/Image');
+var Image = require('./Image');
 
 module.exports = program.version('1.11.0', '-v, --version')
   .option('-n, --number [integer]', 'Number of files to generate', function (numberString) {

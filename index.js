@@ -5,7 +5,7 @@ var http = followRedirects.http;
 var https = followRedirects.https;
 var fs = require('fs');
 var random = require('random-string');
-var Image = require('./image/Image');
+var Image = require('./Image');
 var readline = require('readline');
 
 followRedirects.maxRedirects = 10;
