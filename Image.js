@@ -35,7 +35,7 @@ module.exports = {
     }
     return this.prvd;
   },
-  setPrvd: function (prvd) {
+  setProvider: function (prvd) {
     'use strict';
     this.prvd = prvd;
   },
