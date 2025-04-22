@@ -2,12 +2,12 @@ var commander = require('commander');
 var image = require('./Image');
 // The version should be the same as the package.json version, keep it in sync
 module.exports = commander.version('1.11.0','-v, --version')
-  .option('-n, --number [integer]', 'Number of files to generate',function(n){
+  .option('-n, --number [integer]', 'Number of files to generate',function(numberFileToGenerateInput){
     'use strict';
-    var n2 = parseInt(n);
+    var numberFileToGenerate = parseInt(numberFileToGenerateInput);
     // n should be a valid number
-    if(isNaN(n2)){return 1}
-    return n2;
+    if(isNaN(numberFileToGenerate)){return 1}
+    return numberFileToGenerate;
   },1)
   .option('-s, --size [1024x768]', 'Image size',function(s){
     'use strict';
