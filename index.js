@@ -22,9 +22,9 @@ function downloadImage(url,fileName){
       writeStream.close(function(){
         'use strict';
         downloadedFilesCount++;downloadedFiles.push(fileName);
-        var pct=Math.ceil((downloadedFilesCount/commanderConfig.number*100));
+        var downloadPercentage=Math.ceil((downloadedFilesCount/commanderConfig.number*100));
         readline.cursorTo(process.stdout,0);
-        process.stdout.write('Downloaded '+downloadedFilesCount+' of '+commanderConfig.number+'. ['+pct+' %]');
+        process.stdout.write('Downloaded '+downloadedFilesCount+' of '+commanderConfig.number+'. ['+downloadPercentage+' %]');
         if(downloadedFilesCount===commanderConfig.number){console.info("\n" + commanderConfig.number + ' image(s) successfully downloaded')}
       });
     });
