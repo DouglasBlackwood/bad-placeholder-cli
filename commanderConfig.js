@@ -1,8 +1,7 @@
-var fs = require('fs');
-var cmd = require('commander');
-var img = require('./Image');
+var commander = require('commander');
+var image = require('./Image');
 // The version should be the same as the package.json version, keep it in sync
-module.exports = cmd.version('1.11.0','-v, --version')
+module.exports = commander.version('1.11.0','-v, --version')
   .option('-n, --number [integer]', 'Number of files to generate',function(n){
     'use strict';
     var n2 = parseInt(n);
@@ -18,11 +17,11 @@ module.exports = cmd.version('1.11.0','-v, --version')
     if (s.indexOf('x')===-1){return '1024x768'}
     return s;
   },'1024x768')
-  .option('-p, --provider [provider]', 'Set the image provider; '+Object.keys(img.list).join(', '),
-    function setImageProvider(provider){
+  .option('-p, --provider [provider]', 'Set the image provider; '+Object.keys(image.list).join(', '),
+    function(provider){
       'use strict';
       // Set image provider
-      img.setProvider(provider);
+      image.setProvider(provider);
       return provider;
-    },img.setProvider('random'))
+    },image.setProvider('random'))
   .parse(process.argv);
