@@ -29,7 +29,7 @@ module.exports = {
     'use strict';
     // Select random image provider
     if (this.provider==='random') {
-      var l=Object.keys(this.list);
+      var l=Object.keys(this.providers);
       var i=Math.floor(Math.random()*l.length);
       return l[i];
     }
@@ -41,6 +41,6 @@ module.exports = {
   },
   getImageUrl: function (size) {
     'use strict';
-    return this.list[this.getProvider()].getImageUrl(size);
+    return this.providers[this.getProvider()].getImageUrl(size);
   }
 };
