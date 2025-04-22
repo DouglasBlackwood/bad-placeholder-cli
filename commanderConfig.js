@@ -19,7 +19,7 @@ module.exports = cmd.version('1.11.0','-v, --version')
     return s;
   },'1024x768')
   .option('-p, --provider [provider]', 'Set the image provider; '+Object.keys(img.list).join(', '),
-    function setImageProvider(provider){
+    function(provider){
       'use strict';
       // Set image provider
       img.setProvider(provider);
