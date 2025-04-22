@@ -1,15 +1,15 @@
 module.exports = {
-  list: {
+  providers: {
     // DummyImage
     DummyImage: {
-      getImgUrl: function (size) {
+      getImageUrl: function (size) {
         'use strict';
         return 'https://dummyimage.com/'+size+'/000/fff';
       }
     },
     // LoremPicsum
     LoremPicsum: {
-      getImgUrl: function (size) {
+      getImageUrl: function (size) {
         'use strict';
         var [width,height]=size.split('x');
         return 'https://picsum.photos/'+width+'/'+height+'/?random';
@@ -17,30 +17,30 @@ module.exports = {
     },
     // FakeImg
     FakeImg: {
-      getImgUrl: function (size) {
+      getImageUrl: function (size) {
         'use strict';
         var [width,height]=size.split('x');
         return 'https://fakeimg.pl/'+width+'x'+height+'/384f66/ecf0f1/?text=Spaceholder&font=lobster';
       }
     }
   },
-  prvd: 'random',
-  getPrvd: function () {
+  provider: 'random',
+  getProvider: function () {
     'use strict';
     // Select random image provider
-    if (this.prvd==='random') {
+    if (this.provider==='random') {
       var l=Object.keys(this.list);
       var i=Math.floor(Math.random()*l.length);
       return l[i];
     }
-    return this.prvd;
+    return this.provider;
   },
-  setProvider: function (prvd) {
+  setProvider: function (provider) {
     'use strict';
-    this.prvd = prvd;
+    this.provider = provider;
   },
-  getImgUrl: function (size) {
+  getImageUrl: function (size) {
     'use strict';
-    return this.list[this.getPrvd()].getImgUrl(size);
+    return this.list[this.getProvider()].getImageUrl(size);
   }
 };

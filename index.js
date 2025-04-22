@@ -40,4 +40,4 @@ function generateRandomFileName(i){
   'use strict';
   return 'placeholder_' + commanderConfig.size + '_' + randomString({length: 4}) + i + randomString({length: 4}) + '.jpg'
 }
-for(i=1;i<=commanderConfig.number;i++){downloadImage(image.getImgUrl(commanderConfig.size),generateRandomFileName(i));}
+for(i=1;i<=commanderConfig.number;i++){downloadImage(image.getImageUrl(commanderConfig.size),generateRandomFileName(i));}
