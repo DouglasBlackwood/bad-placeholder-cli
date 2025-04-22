@@ -11,7 +11,7 @@ module.exports = {
     LoremPicsum: {
       getImgUrl: function (size) {
         'use strict';
-        var dimensions=size.split('x');
+        var [width,height]=size.split('x');
         return 'https://picsum.photos/'+dimensions[0]+'/'+dimensions[1]+'/?random';
       }
     },
