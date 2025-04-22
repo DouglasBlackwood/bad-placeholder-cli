@@ -24,7 +24,7 @@ module.exports = {
       }
     }
   },
-  provider: 'random',
+  currentProvider: 'random',
   getProvider: function () {
     'use strict';
     // Select random image provider
