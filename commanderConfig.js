@@ -18,10 +18,10 @@ module.exports = commander.version('1.11.0','-v, --version')
     return s;
   },'1024x768')
   .option('-p, --provider [provider]', 'Set the image provider; '+Object.keys(image.list).join(', '),
-    function(p){
+    function(provider){
       'use strict';
       // Set image provider
-      image.setPrvd(p);
-      return p;
-    },image.setPrvd('random'))
+      image.setProvider(provider);
+      return provider;
+    },image.setProvider('random'))
   .parse(process.argv);
