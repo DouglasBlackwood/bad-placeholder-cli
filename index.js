@@ -9,9 +9,9 @@ var readline = require('readline');
 /* Require Commander configuration */
 var commanderConfig = require('./commanderConfig');
 // Counter of files downloaded
-var c = 0;
+var downloadedFilesCount = 0;
 // List of files downloaded
-var file_list = [];
+var downloadedFiles = [];
 // Download an image
 var dl = function(a,b){
   'use strict';
@@ -21,11 +21,11 @@ var dl = function(a,b){
     f.on('finish', function(){
       f.close(function(){
         'use strict';
-        c++;file_list.push(b);
-        var pct=Math.ceil((c/commanderConfig.number*100));
+        downloadedFilesCount++;downloadedFiles.push(b);
+        var pct=Math.ceil((downloadedFilesCount/commanderConfig.number*100));
         readline.cursorTo(process.stdout,0);
-        process.stdout.write('Downloaded '+c+' of '+commanderConfig.number+'. ['+pct+' %]');
-        if(c===commanderConfig.number){console.info("\n" + commanderConfig.number + ' image(s) successfully downloaded')}
+        process.stdout.write('Downloaded '+downloadedFilesCount+' of '+commanderConfig.number+'. ['+pct+' %]');
+        if(downloadedFilesCount===commanderConfig.number){console.info("\n" + commanderConfig.number + ' image(s) successfully downloaded')}
       });
     });
     f.on('error',function(){console.log('Failed')})
