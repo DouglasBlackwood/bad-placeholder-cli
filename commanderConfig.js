@@ -9,13 +9,13 @@ module.exports = commander.version('1.11.0','-v, --version')
     if(isNaN(numberFileToGenerate)){return 1}
     return numberFileToGenerate;
   },1)
-  .option('-s, --size [1024x768]', 'Image size',function(s){
+  .option('-s, --size [1024x768]', 'Image size',function(imageSize){
     'use strict';
     // Check for an "x" in the string
     // and if not, return the default size
     // 1024x768
-    if (s.indexOf('x')===-1){return '1024x768'}
-    return s;
+    if (imageSize.indexOf('x')===-1){return '1024x768'}
+    return imageSize;
   },'1024x768')
   .option('-p, --provider [provider]', 'Set the image provider; '+Object.keys(image.list).join(', '),
     function(provider){
