@@ -22,9 +22,9 @@ function downloadImage(url,fileName){
       writeStream.close(function(){
         'use strict';
         downloadedFilesCount++;downloadedFiles.push(fileName);
-        var downloadPercentage=Math.ceil((downloadedFilesCount/commanderConfig.number*100));
+        var pct=Math.ceil((downloadedFilesCount/commanderConfig.number*100));
         readline.cursorTo(process.stdout,0);
-        process.stdout.write('Downloaded '+downloadedFilesCount+' of '+commanderConfig.number+'. ['+downloadPercentage+' %]');
+        process.stdout.write('Downloaded '+downloadedFilesCount+' of '+commanderConfig.number+'. ['+pct+' %]');
         if(downloadedFilesCount===commanderConfig.number){console.info("\n" + commanderConfig.number + ' image(s) successfully downloaded')}
       });
     });
@@ -40,4 +40,4 @@ function generateRandomFileName(i){
   'use strict';
   return 'placeholder_' + commanderConfig.size + '_' + randomString({length: 4}) + i + randomString({length: 4}) + '.jpg'
 }
-for(i=1;i<=commanderConfig.number;i++){downloadImage(image.getImgUrl(commanderConfig.size),generateRandomFileName(i));}
+for(i=1;i<=commanderConfig.number;i++){downloadImage(image.getImageUrl(commanderConfig.size),generateRandomFileName(i));}

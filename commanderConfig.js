@@ -18,11 +18,11 @@ module.exports = cmd.version('1.11.0','-v, --version')
     if (s.indexOf('x')===-1){return '1024x768'}
     return s;
   },'1024x768')
-  .option('-p, --provider [provider]', 'Set the image provider; '+Object.keys(img.list).join(', '),
+  .option('-p, --provider [provider]', 'Set the image provider; '+Object.keys(img.providers).join(', '),
     function(p){
       'use strict';
       // Set image provider
-      img.setPrvd(p);
+      img.setProvider(p);
       return p;
-    },img.setPrvd('random'))
+    },img.setProvider('random'))
   .parse(process.argv);
