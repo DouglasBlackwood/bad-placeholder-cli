@@ -12,15 +12,15 @@ module.exports = {
       getImgUrl: function (size) {
         'use strict';
         var [width,height]=size.split('x');
-        return 'https://picsum.photos/'+dimensions[0]+'/'+dimensions[1]+'/?random';
+        return 'https://picsum.photos/'+width+'/'+height+'/?random';
       }
     },
     // FakeImg
     FakeImg: {
       getImgUrl: function (size) {
         'use strict';
-        var dimensions=size.split('x');
-        return 'https://fakeimg.pl/'+dimensions[0]+'x'+dimensions[1]+'/384f66/ecf0f1/?text=Spaceholder&font=lobster';
+        var [width,height]=size.split('x');
+        return 'https://fakeimg.pl/'+width+'x'+height+'/384f66/ecf0f1/?text=Spaceholder&font=lobster';
       }
     }
   },
