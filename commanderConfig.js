@@ -1,14 +1,15 @@
 var fs = require('fs');
 var cmd = require('commander');
 var img = require('./Image');
+
 // The version should be the same as the package.json version, keep it in sync
 module.exports = cmd.version('1.11.0','-v, --version')
-  .option('-n, --number [integer]', 'Number of files to generate',function(n){
+  .option('-n, --number [integer]', 'Number of files to generate',function(numberFileToGenerate){
     'use strict';
-    var n2 = parseInt(n);
-    // n should be a valid number
-    if(isNaN(n2)){return 1}
-    return n2;
+    var convertStringToInt = parseInt(numberFileToGenerate);
+    // numberFileToGenerate should be a valid number
+    if(isNaN(convertStringToInt)){return 1}
+    return convertStringToInt;
   },1)
   .option('-s, --size [1024x768]', 'Image size',function(s){
     'use strict';
