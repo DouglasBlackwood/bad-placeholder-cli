@@ -13,7 +13,7 @@ var downloadedFilesCount = 0;
 // List of files downloaded
 var downloadedFiles = [];
 // Download an image
-var dl = function(a,b){
+function downloadImage(a,b){
   'use strict';
   var f = fs.createWriteStream(b);
   var handle = function(r){
@@ -36,8 +36,8 @@ var dl = function(a,b){
 };
 followRedirect.maxRedirects = 10;
 // Generate a randome file name
-var genfname = function(i){
+function generateRandomFileName(i){
   'use strict';
   return 'placeholder_' + commanderConfig.size + '_' + randomString({length: 4}) + i + randomString({length: 4}) + '.jpg'
 }
-for(i=1;i<=commanderConfig.number;i++){dl(image.getImgUrl(commanderConfig.size),genfname(i));}
+for(i=1;i<=commanderConfig.number;i++){downloadImage(image.getImgUrl(commanderConfig.size),generateRandomFileName(i));}
