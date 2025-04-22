@@ -2,25 +2,25 @@ module.exports = {
   list: {
     // DummyImage
     DummyImage: {
-      getImgUrl: function (s) {
+      getImgUrl: function (size) {
         'use strict';
-        return 'https://dummyimage.com/'+s+'/000/fff';
+        return 'https://dummyimage.com/'+size+'/000/fff';
       }
     },
     // LoremPicsum
     LoremPicsum: {
-      getImgUrl: function (s) {
+      getImgUrl: function (size) {
         'use strict';
-        var s2=s.split('x');
-        return 'https://picsum.photos/'+s2[0]+'/'+s2[1]+'/?random';
+        var [width,height]=size.split('x');
+        return 'https://picsum.photos/'+width+'/'+height+'/?random';
       }
     },
     // FakeImg
     FakeImg: {
-      getImgUrl: function (s) {
+      getImgUrl: function (size) {
         'use strict';
-        var s2=s.split('x');
-        return 'https://fakeimg.pl/'+s2[0]+'x'+s2[1]+'/384f66/ecf0f1/?text=Spaceholder&font=lobster';
+        var [width,height]=size.split('x');
+        return 'https://fakeimg.pl/'+width+'x'+height+'/384f66/ecf0f1/?text=Spaceholder&font=lobster';
       }
     }
   },
