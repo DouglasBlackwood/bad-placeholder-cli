@@ -28,16 +28,16 @@ module.exports = {
   getProvider: function () {
     'use strict';
     // Select random image provider
-    if (this.provider==='random') {
+    if (this.currentProvider==='random') {
       var l=Object.keys(this.providers);
       var i=Math.floor(Math.random()*l.length);
       return l[i];
     }
-    return this.provider;
+    return this.currentProvider;
   },
   setProvider: function (provider) {
     'use strict';
-    this.provider = provider;
+    this.currentProvider = provider;
   },
   getImageUrl: function (size) {
     'use strict';
