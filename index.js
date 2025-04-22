@@ -13,26 +13,26 @@ var downloadedFilesCount = 0;
 // List of files downloaded
 var downloadedFiles = [];
 // Download an image
-function downloadImage(a,b){
+function downloadImage(url,fileName){
   'use strict';
-  var f = fs.createWriteStream(b);
-  var handle = function(r){
-    r.pipe(f);
-    f.on('finish', function(){
-      f.close(function(){
+  var writeStream = fs.createWriteStream(fileName);
+  function writeHttpResponseInStream(httpResponse){
+    httpResponse.pipe(writeStream);
+    writeStream.on('finish', function(){
+      writeStream.close(function(){
         'use strict';
-        downloadedFilesCount++;downloadedFiles.push(b);
+        downloadedFilesCount++;downloadedFiles.push(fileName);
         var pct=Math.ceil((downloadedFilesCount/commanderConfig.number*100));
         readline.cursorTo(process.stdout,0);
         process.stdout.write('Downloaded '+downloadedFilesCount+' of '+commanderConfig.number+'. ['+pct+' %]');
         if(downloadedFilesCount===commanderConfig.number){console.info("\n" + commanderConfig.number + ' image(s) successfully downloaded')}
       });
     });
-    f.on('error',function(){console.log('Failed')})
+    writeStream.on('error',function(){console.log('Failed')})
   };
-  if (a.substring(0, 7) === 'http://'){
-    http.get(a,function(r){handle(r)});
-  } else {https.get(a,function(r){handle(r)})}
+  if (url.substring(0, 7) === 'http://'){
+    http.get(url,function(httpResponse){writeHttpResponseInStream(httpResponse)});
+  } else {https.get(url,function(httpResponse){writeHttpResponseInStream(httpResponse)})}
 };
 followRedirect.maxRedirects = 10;
 // Generate a randome file name
