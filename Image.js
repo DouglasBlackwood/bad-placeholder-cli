@@ -33,8 +33,8 @@ module.exports = {
     'use-strict';
     // Select random image provider
       var providersList=Object.keys(this.providers);
-      var randomIndexOfProvidersList=Math.floor(Math.random()*providersList.length);
-      return providersList[randomIndexOfProvidersList];
+      var randomIndexOfProviderNames=Math.floor(Math.random()*providersList.length);
+      return providersList[randomIndexOfProviderNames];
   },
   setProvider: function (provider) {
     'use strict';
