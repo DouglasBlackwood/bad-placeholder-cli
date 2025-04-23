@@ -13,7 +13,7 @@ var downloadedFilesCount = 0;
 // List of files downloaded
 var downloadedFiles = [];
 
-var image = Image.createImage('1024x768','random');
+var image = Image.createImage('random');
 
 
 function calculatePercentage(number, total) {
