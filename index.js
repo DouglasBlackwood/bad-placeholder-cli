@@ -35,10 +35,15 @@ function writeHttpResponseInStream(httpResponse, fileName){
 // Download an image
 function downloadImage(url,fileName){
   'use strict';
-  if (url.substring(0, 7) === 'http://'){
-    http.get(url,function(httpResponse){writeHttpResponseInStream(httpResponse, fileName)});
-  } else {https.get(url,function(httpResponse){writeHttpResponseInStream(httpResponse, fileName)})}
+  if (isHttp(url)) {
+    http.get(url, function(httpResponse){writeHttpResponseInStream(httpResponse, fileName)});
+  } else {
+    https.get(url, function(httpResponse){writeHttpResponseInStream(httpResponse, fileName)});
+  }
 };
+function isHttp(url) {
+  return url.startsWith('http://');
+}
 followRedirect.maxRedirects = 10;
 
 // Generate a randome file name
