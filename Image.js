@@ -50,8 +50,5 @@ class Image {
 }
 
 module.exports = {
-  Image: Image,
-  createImage: function(provider = 'random') {
-    return new Image(provider);
-  }
+  Image: Image
 }
