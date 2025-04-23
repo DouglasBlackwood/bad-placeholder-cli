@@ -27,13 +27,14 @@ module.exports = {
   currentProvider: 'random',
   getProvider: function () {
     'use strict';
+    return this.currentProvider === 'random' ? this.getRandomProvider() : this.currentProvider;
+  },
+  getRandomProvider: function () {
+    'use-strict';
     // Select random image provider
-    if (this.currentProvider==='random') {
       var providersList=Object.keys(this.providers);
       var randomIndexOfProvidersList=Math.floor(Math.random()*providersList.length);
       return providersList[randomIndexOfProvidersList];
-    }
-    return this.currentProvider;
   },
   setProvider: function (provider) {
     'use strict';
