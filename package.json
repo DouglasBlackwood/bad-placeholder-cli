@@ -6,7 +6,8 @@
 		"bad-placeholder": "index.js"
 	},
 	"scripts": {
-		"test": "mocha test --timeout 5000"
+		"test": "mocha test --timeout 5000",
+		"lint": "biome check --unsafe"
 	},
 	"keywords": [
 		"placeholder",
