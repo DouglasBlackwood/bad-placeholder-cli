@@ -29,9 +29,9 @@ module.exports = {
     'use strict';
     // Select random image provider
     if (this.currentProvider==='random') {
-      var l=Object.keys(this.providers);
-      var i=Math.floor(Math.random()*l.length);
-      return l[i];
+      var providersList=Object.keys(this.providers);
+      var randomIndexOfProvidersList=Math.floor(Math.random()*providersList.length);
+      return providersList[randomIndexOfProvidersList];
     }
     return this.currentProvider;
   },
