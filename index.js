@@ -8,36 +8,34 @@ var image = require('./Image');
 var readline = require('readline');
 /* Require Commander configuration */
 var commanderConfig = require('./commanderConfig');
-// Counter of files downloaded
-var downloadedFilesCount = 0;
-// List of files downloaded
-var downloadedFiles = [];
+
 
 function calculatePercentage(number, total) {
   return Math.ceil(number/total*100);
 }
 
-function writeHttpResponseInStream(httpResponse, fileName){
+function writeHttpResponseInStream(httpResponse, fileName, downloadIncrement){
   var writeStream = fs.createWriteStream(fileName);
   httpResponse.pipe(writeStream);
   writeStream.on('finish', function(){
     writeStream.close(function(){
       'use strict';
-      downloadedFilesCount++;downloadedFiles.push(fileName);
-      var downloadPercentage=calculatePercentage(downloadedFilesCount,commanderConfig.number);
+      downloadIncrement.count++;
+      downloadIncrement.files.push(fileName);
+      var downloadPercentage=calculatePercentage(downloadIncrement.count,commanderConfig.number);
       readline.cursorTo(process.stdout,0);
-      process.stdout.write('Downloaded '+downloadedFilesCount+' of '+commanderConfig.number+'. ['+downloadPercentage+' %]');
-      if(downloadedFilesCount===commanderConfig.number){console.info("\n" + commanderConfig.number + ' image(s) successfully downloaded')}
+      process.stdout.write('Downloaded '+downloadIncrement.count+' of '+commanderConfig.number+'. ['+downloadPercentage+' %]');
+      if(downloadIncrement.count===commanderConfig.number){console.info("\n" + commanderConfig.number + ' image(s) successfully downloaded')}
     });
   });
   writeStream.on('error',function(){console.log('Failed')})
 };
 // Download an image
-function downloadImage(url,fileName){
+function downloadImage(url,fileName, downloadIncrement){
   'use strict';
   if (url.substring(0, 7) === 'http://'){
-    http.get(url,function(httpResponse){writeHttpResponseInStream(httpResponse, fileName)});
-  } else {https.get(url,function(httpResponse){writeHttpResponseInStream(httpResponse, fileName)})}
+    http.get(url,function(httpResponse){writeHttpResponseInStream(httpResponse, fileName, downloadIncrement)});
+  } else {https.get(url,function(httpResponse){writeHttpResponseInStream(httpResponse, fileName, downloadIncrement)})}
 };
 followRedirect.maxRedirects = 10;
 
@@ -47,4 +45,19 @@ function generateRandomFileName(fileNumber){
   return 'placeholder_' + commanderConfig.size + '_' + randomString({length: 4}) + fileNumber + randomString({length: 4}) + '.jpg'
 }
 
-for(i=1;i<=commanderConfig.number;i++){downloadImage(image.getImageUrl(commanderConfig.size),generateRandomFileName(i));}
+function main() {
+  'use strict';
+  var i;
+  //Objet pour modifier les valeurs count et files
+  var downloadIncrement = {
+    count: 0,
+    files: []
+  };
+
+  for(i=1;i<=commanderConfig.number;i++)
+  {
+    downloadImage(image.getImageUrl(commanderConfig.size),generateRandomFileName(i), downloadIncrement);
+  }
+}
+
+main();
