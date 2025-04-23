@@ -32,9 +32,9 @@ module.exports = {
   getRandomProvider: function () {
     'use-strict';
     // Select random image provider
-      var providersList=Object.keys(this.providers);
-      var randomIndexOfProviderNames=Math.floor(Math.random()*providersList.length);
-      return providersList[randomIndexOfProviderNames];
+      var providerNames=Object.keys(this.providers);
+      var randomIndexOfProviderNames=Math.floor(Math.random()*providerNames.length);
+      return providerNames[randomIndexOfProviderNames];
   },
   setProvider: function (provider) {
     'use strict';
