@@ -10,9 +10,8 @@ module.exports = commander
 	.option(
 		"-n, --number [integer]",
 		"Number of files to generate",
-		function (numberFileToGenerateInput) {
-			"use strict";
-			var numberFileToGenerate = parseInt(numberFileToGenerateInput);
+		(numberFileToGenerateInput) => {
+			var numberFileToGenerate = Number.parseInt(numberFileToGenerateInput);
 			// n should be a valid number
 			if (isNaN(numberFileToGenerate)) {
 				return DEFAULT_NUMBER;
@@ -24,8 +23,7 @@ module.exports = commander
 	.option(
 		"-s, --size [1024x768]",
 		"Image size",
-		function (imageSize) {
-			"use strict";
+		(imageSize) => {
 			// Check for an "x" in the string
 			// and if not, return the default size
 			// 1024x768
@@ -39,8 +37,7 @@ module.exports = commander
 	.option(
 		"-p, --provider [provider]",
 		"Set the image provider; " + Object.keys(image.providers).join(", "),
-		function (provider) {
-			"use strict";
+		(provider) => {
 			// Set image provider
 			image.setProvider(provider);
 			return provider;

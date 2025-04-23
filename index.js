@@ -20,9 +20,8 @@ function calculatePercentage(number, total) {
 function writeHttpResponseInStream(httpResponse, fileName) {
 	var writeStream = fs.createWriteStream(fileName);
 	httpResponse.pipe(writeStream);
-	writeStream.on("finish", function () {
-		writeStream.close(function () {
-			"use strict";
+	writeStream.on("finish", () => {
+		writeStream.close(() => {
 			downloadedFilesCount++;
 			downloadedFiles.push(fileName);
 			var downloadPercentage = calculatePercentage(
@@ -46,19 +45,18 @@ function writeHttpResponseInStream(httpResponse, fileName) {
 			}
 		});
 	});
-	writeStream.on("error", function () {
+	writeStream.on("error", () => {
 		console.log("Failed");
 	});
 }
 // Download an image
 function downloadImage(url, fileName) {
-	"use strict";
 	if (isHttp(url)) {
-		http.get(url, function (httpResponse) {
+		http.get(url, (httpResponse) => {
 			writeHttpResponseInStream(httpResponse, fileName);
 		});
 	} else {
-		https.get(url, function (httpResponse) {
+		https.get(url, (httpResponse) => {
 			writeHttpResponseInStream(httpResponse, fileName);
 		});
 	}
@@ -70,7 +68,6 @@ followRedirect.maxRedirects = 10;
 
 // Generate a randome file name
 function generateRandomFileName(fileNumber) {
-	"use strict";
 	return (
 		"placeholder_" +
 		commanderConfig.size +

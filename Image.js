@@ -2,23 +2,18 @@ module.exports = {
 	providers: {
 		// DummyImage
 		DummyImage: {
-			getImageUrl: function (size) {
-				"use strict";
-				return "https://dummyimage.com/" + size + "/000/fff";
-			},
+			getImageUrl: (size) => "https://dummyimage.com/" + size + "/000/fff",
 		},
 		// LoremPicsum
 		LoremPicsum: {
-			getImageUrl: function (size) {
-				"use strict";
+			getImageUrl: (size) => {
 				var [width, height] = size.split("x");
 				return "https://picsum.photos/" + width + "/" + height + "/?random";
 			},
 		},
 		// FakeImg
 		FakeImg: {
-			getImageUrl: function (size) {
-				"use strict";
+			getImageUrl: (size) => {
 				var [width, height] = size.split("x");
 				return (
 					"https://fakeimg.pl/" +
@@ -32,7 +27,6 @@ module.exports = {
 	},
 	currentProvider: "random",
 	getProvider: function () {
-		"use strict";
 		return this.currentProvider === "random"
 			? this.getRandomProvider()
 			: this.currentProvider;
@@ -47,11 +41,9 @@ module.exports = {
 		return providerNames[randomIndexOfProviderNames];
 	},
 	setProvider: function (provider) {
-		"use strict";
 		this.currentProvider = provider;
 	},
 	getImageUrl: function (size) {
-		"use strict";
 		return this.providers[this.getProvider()].getImageUrl(size);
 	},
 };
