@@ -13,8 +13,8 @@ var downloadedFilesCount = 0;
 // List of files downloaded
 var downloadedFiles = [];
 
-function calculatePercentage(dividend, divisor) {
-  return Math.ceil(dividend/divisor*100);
+function calculatePercentage(number, total) {
+  return Math.ceil(number/total*100);
 }
 
 function writeHttpResponseInStream(httpResponse, fileName){
