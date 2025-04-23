@@ -1,10 +1,10 @@
-var fs = require("fs");
+const fs = require("node:fs");
 
 module.exports = {
 	getRootFiles: () => fs.readdirSync("./"),
 
 	getPlaceholders: function () {
-		var files = this.getRootFiles();
+		const files = this.getRootFiles();
 
 		return files.filter((filename) => {
 			if (filename.indexOf("placeholder_") !== -1) {
@@ -14,8 +14,8 @@ module.exports = {
 	},
 
 	deletePlaceholders: function () {
-		var placeholders = this.getPlaceholders();
-		var count = placeholders.length;
+		const placeholders = this.getPlaceholders();
+		let count = placeholders.length;
 
 		return new Promise((resolve, reject) => {
 			if (count) {
