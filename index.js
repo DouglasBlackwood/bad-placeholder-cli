@@ -24,7 +24,7 @@ function writeHttpResponseInStream(httpResponse, fileName){
     writeStream.close(function(){
       'use strict';
       downloadedFilesCount++;downloadedFiles.push(fileName);
-      var downloadPercentage=calcPercentage(downloadedFilesCount,commanderConfig.number);
+      var downloadPercentage=calculatePercentage(downloadedFilesCount,commanderConfig.number);
       readline.cursorTo(process.stdout,0);
       process.stdout.write('Downloaded '+downloadedFilesCount+' of '+commanderConfig.number+'. ['+downloadPercentage+' %]');
       if(downloadedFilesCount===commanderConfig.number){console.info("\n" + commanderConfig.number + ' image(s) successfully downloaded')}
