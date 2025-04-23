@@ -19,14 +19,14 @@ module.exports = {
 
 		return new Promise((resolve, reject) => {
 			if (count) {
-				placeholders.forEach((filename) => {
+				for (const filename of placeholders) {
 					fs.unlinkSync(filename);
 					count--;
 
 					if (!count) {
 						resolve();
 					}
-				});
+				}
 			}
 
 			resolve();

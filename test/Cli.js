@@ -12,6 +12,7 @@ describe("bad-placeholder -n 3", () => {
 
 	let result;
 
+	//biome-ignore lint/suspicious/noDuplicateTestHooks: old test runner
 	before((done) => {
 		execa
 			.shell("node ./index.js -n 3")
@@ -46,6 +47,7 @@ describe("bad-placeholder -s 100x100", () => {
 
 	let result;
 
+	//biome-ignore lint/suspicious/noDuplicateTestHooks: old test runner
 	before((done) => {
 		execa
 			.shell("node ./index.js -s 100x100")
@@ -80,7 +82,7 @@ for (const provider of ["DummyImage", "LoremPicsum", "FakeImg"]) {
 		});
 
 		let result;
-
+		//biome-ignore lint/suspicious/noDuplicateTestHooks: old test runner
 		before((done) => {
 			execa
 				.shell(`node ./index.js -p ${provider}`)
