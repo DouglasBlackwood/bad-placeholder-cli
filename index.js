@@ -13,6 +13,10 @@ var downloadedFilesCount = 0;
 // List of files downloaded
 var downloadedFiles = [];
 
+function calcPercentage(dividend, divisor) {
+  return Math.ceil(dividend/divisor*100);
+}
+
 function writeHttpResponseInStream(httpResponse, fileName){
   var writeStream = fs.createWriteStream(fileName);
   httpResponse.pipe(writeStream);
@@ -20,7 +24,7 @@ function writeHttpResponseInStream(httpResponse, fileName){
     writeStream.close(function(){
       'use strict';
       downloadedFilesCount++;downloadedFiles.push(fileName);
-      var downloadPercentage=Math.ceil((downloadedFilesCount/commanderConfig.number*100));
+      var downloadPercentage=calcPercentage(downloadedFilesCount,commanderConfig.number);
       readline.cursorTo(process.stdout,0);
       process.stdout.write('Downloaded '+downloadedFilesCount+' of '+commanderConfig.number+'. ['+downloadPercentage+' %]');
       if(downloadedFilesCount===commanderConfig.number){console.info("\n" + commanderConfig.number + ' image(s) successfully downloaded')}
