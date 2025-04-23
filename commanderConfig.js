@@ -1,7 +1,7 @@
 var commander = require('commander');
 var Image = require('./Image');
 
-var image = Image.createImage('1024x768','random');
+var image = Image.createImage('random');
 
 
 const DEFAULT_NUMBER = 1;
