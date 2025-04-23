@@ -1,8 +1,6 @@
 var commander = require('commander');
 var ImageModule = require('./Image');
-
-var image = new ImageModule.Image('random');
-
+var image = require('./imageInstance');
 
 const DEFAULT_NUMBER = 1;
 const DEFAULT_SIZE = '1024x768';
