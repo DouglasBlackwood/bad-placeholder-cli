@@ -1,35 +1,36 @@
 {
-  "name": "bad-placeholder-cli",
-  "version": "1.11.0",
-  "description": "Download placeholder images from public domain sources blazingly fast",
-  "bin": {
-    "bad-placeholder": "index.js"
-  },
-  "scripts": {
-    "test": "mocha test --timeout 5000"
-  },
-  "keywords": [
-    "placeholder",
-    "images",
-    "placeimg",
-    "dummyimage",
-    "dummy image",
-    "public",
-    "domain",
-    "lorempicsum",
-    "lorem picsum",
-    "fakeimg.pl",
-    "fake images",
-    "fakeimg"
-  ],
-  "dependencies": {
-    "commander": "^2.8.1",
-    "follow-redirects": "^1.15.0",
-    "random-string": "^0.1.2"
-  },
-  "devDependencies": {
-    "chai": "^5.2.0",
-    "execa": "^1.0.0",
-    "mocha": "^11.1.0"
-  }
+	"name": "bad-placeholder-cli",
+	"version": "1.11.0",
+	"description": "Download placeholder images from public domain sources blazingly fast",
+	"bin": {
+		"bad-placeholder": "index.js"
+	},
+	"scripts": {
+		"test": "mocha test --timeout 5000"
+	},
+	"keywords": [
+		"placeholder",
+		"images",
+		"placeimg",
+		"dummyimage",
+		"dummy image",
+		"public",
+		"domain",
+		"lorempicsum",
+		"lorem picsum",
+		"fakeimg.pl",
+		"fake images",
+		"fakeimg"
+	],
+	"dependencies": {
+		"commander": "^2.8.1",
+		"follow-redirects": "^1.15.0",
+		"random-string": "^0.1.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"chai": "^5.2.0",
+		"execa": "^1.0.0",
+		"mocha": "^11.1.0"
+	}
 }
