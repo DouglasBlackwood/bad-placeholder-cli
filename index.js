@@ -40,9 +40,11 @@ function downloadImage(url,fileName){
   } else {https.get(url,function(httpResponse){writeHttpResponseInStream(httpResponse, fileName)})}
 };
 followRedirect.maxRedirects = 10;
+
 // Generate a randome file name
-function generateRandomFileName(i){
+function generateRandomFileName(fileNumber){
   'use strict';
-  return 'placeholder_' + commanderConfig.size + '_' + randomString({length: 4}) + i + randomString({length: 4}) + '.jpg'
+  return 'placeholder_' + commanderConfig.size + '_' + randomString({length: 4}) + fileNumber + randomString({length: 4}) + '.jpg'
 }
+
 for(i=1;i<=commanderConfig.number;i++){downloadImage(image.getImageUrl(commanderConfig.size),generateRandomFileName(i));}
