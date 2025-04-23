@@ -2,26 +2,20 @@ module.exports = {
 	providers: {
 		// DummyImage
 		DummyImage: {
-			getImageUrl: (size) => "https://dummyimage.com/" + size + "/000/fff",
+			getImageUrl: (size) => `https://dummyimage.com/${size}/000/fff`,
 		},
 		// LoremPicsum
 		LoremPicsum: {
 			getImageUrl: (size) => {
-				var [width, height] = size.split("x");
-				return "https://picsum.photos/" + width + "/" + height + "/?random";
+				const [width, height] = size.split("x");
+				return `https://picsum.photos/${width}/${height}/?random`;
 			},
 		},
 		// FakeImg
 		FakeImg: {
 			getImageUrl: (size) => {
-				var [width, height] = size.split("x");
-				return (
-					"https://fakeimg.pl/" +
-					width +
-					"x" +
-					height +
-					"/384f66/ecf0f1/?text=Spaceholder&font=lobster"
-				);
+				const [width, height] = size.split("x");
+				return `https://fakeimg.pl/${width}x${height}/384f66/ecf0f1/?text=Spaceholder&font=lobster`;
 			},
 		},
 	},
@@ -34,8 +28,8 @@ module.exports = {
 	getRandomProvider: function () {
 		"use-strict";
 		// Select random image provider
-		var providerNames = Object.keys(this.providers);
-		var randomIndexOfProviderNames = Math.floor(
+		const providerNames = Object.keys(this.providers);
+		const randomIndexOfProviderNames = Math.floor(
 			Math.random() * providerNames.length,
 		);
 		return providerNames[randomIndexOfProviderNames];

@@ -1,5 +1,5 @@
-var commander = require("commander");
-var image = require("./Image");
+const commander = require("commander");
+const image = require("./Image");
 
 const DEFAULT_NUMBER = 1;
 const DEFAULT_SIZE = "1024x768";
@@ -11,9 +11,9 @@ module.exports = commander
 		"-n, --number [integer]",
 		"Number of files to generate",
 		(numberFileToGenerateInput) => {
-			var numberFileToGenerate = Number.parseInt(numberFileToGenerateInput);
+			const numberFileToGenerate = Number.parseInt(numberFileToGenerateInput);
 			// n should be a valid number
-			if (isNaN(numberFileToGenerate)) {
+			if (Number.isNaN(numberFileToGenerate)) {
 				return DEFAULT_NUMBER;
 			}
 			return numberFileToGenerate;
@@ -36,7 +36,7 @@ module.exports = commander
 	)
 	.option(
 		"-p, --provider [provider]",
-		"Set the image provider; " + Object.keys(image.providers).join(", "),
+		`Set the image provider; ${Object.keys(image.providers).join(", ")}`,
 		(provider) => {
 			// Set image provider
 			image.setProvider(provider);

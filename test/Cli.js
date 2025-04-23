@@ -1,7 +1,7 @@
-var chai = require("chai");
-var expect = require("chai").expect;
-var execa = require("execa");
-var helpers = require("./helpers");
+const chai = require("chai");
+const expect = require("chai").expect;
+const execa = require("execa");
+const helpers = require("./helpers");
 
 describe("bad-placeholder -n 3", () => {
 	before((done) => {
@@ -10,8 +10,9 @@ describe("bad-placeholder -n 3", () => {
 		});
 	});
 
-	var result;
+	let result;
 
+	//biome-ignore lint/suspicious/noDuplicateTestHooks: old test runner
 	before((done) => {
 		execa
 			.shell("node ./index.js -n 3")
@@ -30,7 +31,7 @@ describe("bad-placeholder -n 3", () => {
 	});
 
 	it("should have default dimensions", () => {
-		var dimensions = helpers.getDimensions(
+		const dimensions = helpers.getDimensions(
 			helpers.getPlaceholders()[Math.floor(Math.random() * 2) + 0],
 		);
 		expect(dimensions).to.be.equal("1024x768");
@@ -44,8 +45,9 @@ describe("bad-placeholder -s 100x100", () => {
 		});
 	});
 
-	var result;
+	let result;
 
+	//biome-ignore lint/suspicious/noDuplicateTestHooks: old test runner
 	before((done) => {
 		execa
 			.shell("node ./index.js -s 100x100")
@@ -64,7 +66,7 @@ describe("bad-placeholder -s 100x100", () => {
 	});
 
 	it("should be 100x100", () => {
-		var dimensions = helpers.getDimensions(helpers.getPlaceholders()[0]);
+		const dimensions = helpers.getDimensions(helpers.getPlaceholders()[0]);
 		expect(dimensions).to.be.equal("100x100");
 	});
 });
@@ -72,18 +74,18 @@ describe("bad-placeholder -s 100x100", () => {
 for (const provider of ["DummyImage", "LoremPicsum", "FakeImg"]) {
 	("use strict");
 
-	describe("bad-placeholder -p " + provider, () => {
+	describe(`bad-placeholder -p ${provider}`, () => {
 		before((done) => {
 			helpers.deletePlaceholders().then((response) => {
 				done();
 			});
 		});
 
-		var result;
-
+		let result;
+		//biome-ignore lint/suspicious/noDuplicateTestHooks: old test runner
 		before((done) => {
 			execa
-				.shell("node ./index.js -p " + provider)
+				.shell(`node ./index.js -p ${provider}`)
 				.then((response) => {
 					result = response.stdout;
 					done();
@@ -94,14 +96,12 @@ for (const provider of ["DummyImage", "LoremPicsum", "FakeImg"]) {
 				});
 		});
 
-		it("should generate one image from specified provider (" +
-			provider +
-			")", () => {
+		it(`should generate one image from specified provider (${provider})`, () => {
 			expect(helpers.getPlaceholders().length).to.be.equal(1);
 		});
 
 		it("should have default dimensions", () => {
-			var dimensions = helpers.getDimensions(helpers.getPlaceholders()[0]);
+			const dimensions = helpers.getDimensions(helpers.getPlaceholders()[0]);
 			expect(dimensions).to.be.equal("1024x768");
 		});
 

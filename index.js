@@ -1,46 +1,40 @@
 #! /usr/bin/env node
-var followRedirect = require("follow-redirects");
-var http = followRedirect.http;
-var https = followRedirect.https;
-var fs = require("fs");
-var randomString = require("random-string");
-var image = require("./Image");
-var readline = require("readline");
+const followRedirect = require("follow-redirects");
+const http = followRedirect.http;
+const https = followRedirect.https;
+const fs = require("node:fs");
+const randomString = require("random-string");
+const image = require("./Image");
+const readline = require("node:readline");
 /* Require Commander configuration */
-var commanderConfig = require("./commanderConfig");
+const commanderConfig = require("./commanderConfig");
 // Counter of files downloaded
-var downloadedFilesCount = 0;
+let downloadedFilesCount = 0;
 // List of files downloaded
-var downloadedFiles = [];
+const downloadedFiles = [];
 
 function calculatePercentage(number, total) {
 	return Math.ceil((number / total) * 100);
 }
 
 function writeHttpResponseInStream(httpResponse, fileName) {
-	var writeStream = fs.createWriteStream(fileName);
+	const writeStream = fs.createWriteStream(fileName);
 	httpResponse.pipe(writeStream);
 	writeStream.on("finish", () => {
 		writeStream.close(() => {
 			downloadedFilesCount++;
 			downloadedFiles.push(fileName);
-			var downloadPercentage = calculatePercentage(
+			const downloadPercentage = calculatePercentage(
 				downloadedFilesCount,
 				commanderConfig.number,
 			);
 			readline.cursorTo(process.stdout, 0);
 			process.stdout.write(
-				"Downloaded " +
-					downloadedFilesCount +
-					" of " +
-					commanderConfig.number +
-					". [" +
-					downloadPercentage +
-					" %]",
+				`Downloaded ${downloadedFilesCount} of ${commanderConfig.number}. [${downloadPercentage} %]`,
 			);
 			if (downloadedFilesCount === commanderConfig.number) {
 				console.info(
-					"\n" + commanderConfig.number + " image(s) successfully downloaded",
+					`\n${commanderConfig.number} image(s) successfully downloaded`,
 				);
 			}
 		});
@@ -68,15 +62,7 @@ followRedirect.maxRedirects = 10;
 
 // Generate a randome file name
 function generateRandomFileName(fileNumber) {
-	return (
-		"placeholder_" +
-		commanderConfig.size +
-		"_" +
-		randomString({ length: 4 }) +
-		fileNumber +
-		randomString({ length: 4 }) +
-		".jpg"
-	);
+	return `placeholder_${commanderConfig.size}_${randomString({ length: 4 })}${fileNumber}${randomString({ length: 4 })}.jpg`;
 }
 
 for (i = 1; i <= commanderConfig.number; i++) {
