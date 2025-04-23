@@ -44,13 +44,13 @@ function writeHttpResponseInStream(httpResponse, fileName) {
 	});
 }
 // Download an image
-function downloadImage(url, fileName) {
+async function downloadImage(url, fileName) {
 	if (isHttp(url)) {
-		http.get(url, (httpResponse) => {
+		await http.get(url, (httpResponse) => {
 			writeHttpResponseInStream(httpResponse, fileName);
 		});
 	} else {
-		https.get(url, (httpResponse) => {
+		await https.get(url, (httpResponse) => {
 			writeHttpResponseInStream(httpResponse, fileName);
 		});
 	}
