@@ -4,7 +4,7 @@ var http = followRedirect.http;
 var https = followRedirect.https;
 var fs = require('fs');
 var randomString = require('random-string');
-var Image = require('./Image');
+var ImageModule = require('./Image');
 var readline = require('readline');
 /* Require Commander configuration */
 var commanderConfig = require('./commanderConfig');
@@ -13,7 +13,7 @@ var downloadedFilesCount = 0;
 // List of files downloaded
 var downloadedFiles = [];
 
-var image = new Image('random');
+var image = new ImageModule.Image('random');
 
 
 function calculatePercentage(number, total) {

@@ -1,7 +1,7 @@
 var commander = require('commander');
-var Image = require('./Image');
+var ImageModule = require('./Image');
 
-var image = new Image('random');
+var image = new ImageModule.Image('random');
 
 
 const DEFAULT_NUMBER = 1;
@@ -30,5 +30,5 @@ module.exports = commander.version('1.11.0','-v, --version')
       // Set image provider
       image.setProvider(provider);
       return provider;
-    },image.setProvider('random'))
+    },image.getProvider())
   .parse(process.argv);
