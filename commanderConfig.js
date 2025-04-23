@@ -1,5 +1,8 @@
 var commander = require('commander');
-var image = require('./Image');
+var Image = require('./Image');
+
+var image = Image.createImage('1024x768','random');
+
 
 const DEFAULT_NUMBER = 1;
 const DEFAULT_SIZE = '1024x768';
