@@ -1,32 +1,34 @@
 'use strict';
 
+const PROVIDER_NAMES = ['DummyImage', 'LoremPicsum', 'FakeImg'];
+
+const PROVIDERS = {
+  DummyImage: {
+    getImageUrl: function (size) {
+      return 'https://dummyimage.com/'+size+'/000/fff';
+    }
+  },
+  LoremPicsum: {
+    getImageUrl: function (size) {
+      var [width,height]=size.split('x');
+      return 'https://picsum.photos/'+width+'/'+height+'/?random';
+    }
+  },
+  FakeImg: {
+    getImageUrl: function (size) {
+      var [width,height]=size.split('x');
+      return 'https://fakeimg.pl/'+width+'x'+height+'/384f66/ecf0f1/?text=Spaceholder&font=lobster';
+    }
+  }
+};
+
 class Image {
   constructor(provider) {
     this.provider = provider;
-
-    this.providers = {
-      DummyImage: {
-        getImageUrl: function (size) {
-          return 'https://dummyimage.com/'+size+'/000/fff';
-        }
-      },
-      LoremPicsum: {
-        getImageUrl: function (size) {
-          var [width,height]=size.split('x');
-          return 'https://picsum.photos/'+width+'/'+height+'/?random';
-        }
-      },
-      FakeImg: {
-        getImageUrl: function (size) {
-          var [width,height]=size.split('x');
-          return 'https://fakeimg.pl/'+width+'x'+height+'/384f66/ecf0f1/?text=Spaceholder&font=lobster';
-        }
-      }
-    };
   }
 
   getImageUrl(size) {
-    return this.providers[this.getProvider()].getImageUrl(size);
+    return PROVIDERS[this.getProvider()].getImageUrl(size);
   }
 
   setProvider(provider) {
@@ -42,13 +44,14 @@ class Image {
   }
 
   selectRandomProvider() {
-    var providersKeys = Object.keys(this.providers);
-    var randomIndex = Math.floor(Math.random() * providersKeys.length);
+    var randomIndex = Math.floor(Math.random() * PROVIDER_NAMES.length);
     
-    return providersKeys[randomIndex];
+    return PROVIDER_NAMES[randomIndex];
   }
 }
 
 module.exports = {
-  Image: Image
+  Image: Image,
+  PROVIDER_NAMES: PROVIDER_NAMES,
+  PROVIDERS: PROVIDERS
 }

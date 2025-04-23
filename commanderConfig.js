@@ -24,7 +24,7 @@ module.exports = commander.version('1.11.0','-v, --version')
     if (imageSize.indexOf('x')===-1){return DEFAULT_SIZE}
     return imageSize;
   }, DEFAULT_SIZE)
-  .option('-p, --provider [provider]', 'Set the image provider; '+Object.keys(image.providers).join(', '),
+  .option('-p, --provider [provider]', 'Set the image provider; '+ImageModule.PROVIDER_NAMES.join(', '),
     function(provider){
       'use strict';
       // Set image provider
