@@ -71,7 +71,7 @@ describe('bad-placeholder -s 100x100', function() {
   });
 });
 
-for (const provider of ["DummyImage", "LoremPicsum", "FakeImg"]) {
+for (const provider of ["DummyImage", "LoremPicsum", "PlaceBear"]) {
   'use strict';
 
   describe('bad-placeholder -p ' + provider, function() {
