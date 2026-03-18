@@ -15,12 +15,12 @@ module.exports = {
         return 'https://picsum.photos/'+s2[0]+'/'+s2[1]+'/?random';
       }
     },
-    // FakeImg
-    FakeImg: {
+    // PlaceBear
+    PlaceBear: {
       getImgUrl: function (s) {
         'use strict';
         var s2=s.split('x');
-        return 'https://fakeimg.pl/'+s2[0]+'x'+s2[1]+'/384f66/ecf0f1/?text=Spaceholder&font=lobster';
+        return 'https://placebear.com/'+s2[0]+'/'+s2[1];
       }
     }
   },
