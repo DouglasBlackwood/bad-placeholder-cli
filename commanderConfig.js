@@ -7,13 +7,8 @@ module.exports = cmd
 	.option(
 		"-n, --number [integer]",
 		"Number of files to generate",
-<<<<<<< HEAD
-		function (n) {
-			"use strict";
-=======
 		(n) => {
 			
->>>>>>> 248ffcdc50c6d7af5640eb076f71251038b62ba7
 			var n2 = parseInt(n);
 			// n should be a valid number
 			if (isNaN(n2)) {
@@ -26,13 +21,8 @@ module.exports = cmd
 	.option(
 		"-s, --size [1024x768]",
 		"Image size",
-<<<<<<< HEAD
-		function (s) {
-			"use strict";
-=======
 		(s) => {
 			
->>>>>>> 248ffcdc50c6d7af5640eb076f71251038b62ba7
 			// Check for an "x" in the string
 			// and if not, return the default size
 			// 1024x768
@@ -46,13 +36,8 @@ module.exports = cmd
 	.option(
 		"-p, --provider [provider]",
 		"Set the image provider; " + Object.keys(img.list).join(", "),
-<<<<<<< HEAD
-		function (p) {
-			"use strict";
-=======
 		(p) => {
 			
->>>>>>> 248ffcdc50c6d7af5640eb076f71251038b62ba7
 			// Set image provider
 			img.setPrvd(p);
 			return p;

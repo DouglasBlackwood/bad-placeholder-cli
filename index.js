@@ -13,15 +13,6 @@ var downloadedFileCounter = 0;
 // List of files downloaded
 var file_list = [];
 // Download an image
-var dl = function (a, b) {
-	"use strict";
-	var f = fs.createWriteStream(b);
-	var handle = function (r) {
-		r.pipe(f);
-		f.on("finish", function () {
-			f.close(function () {
-				"use strict";
-var dl = (a, b) => {
 var downloadPlaceHolder = (a, b) => {
 	
 	var f = fs.createWriteStream(b);
@@ -29,6 +20,7 @@ var downloadPlaceHolder = (a, b) => {
 		r.pipe(f);
 		f.on("finish", () => {
 			f.close(() => {
+				
 				downloadedFileCounter++;
 				file_list.push(b);
 				var pct = Math.ceil((downloadedFileCounter / cmd.number) * 100);
