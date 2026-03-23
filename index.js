@@ -15,11 +15,11 @@ var file_list = [];
 // Download an image
 var downloadPlaceHolder = (a, b) => {
 	
-	var f = fs.createWriteStream(b);
+	var fileStream = fs.createWriteStream(b);
 	var handle = (r) => {
-		r.pipe(f);
-		f.on("finish", () => {
-			f.close(() => {
+		r.pipe(fileStream);
+		fileStream.on("finish", () => {
+			fileStream.close(() => {
 				
 				downloadedFileCounter++;
 				file_list.push(b);
@@ -33,7 +33,7 @@ var downloadPlaceHolder = (a, b) => {
 				}
 			});
 		});
-		f.on("error", () => {
+		fileStream.on("error", () => {
 			console.log("Failed");
 		});
 	};
