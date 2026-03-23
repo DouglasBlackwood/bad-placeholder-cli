@@ -9,7 +9,7 @@ var rdl = require("readline");
 /* Require Commander configuration */
 var cmd = require("./commanderConfig");
 // Counter of files downloaded
-var c = 0;
+var downloadedFileCounter = 0;
 // List of files downloaded
 var file_list = [];
 // Download an image
@@ -21,14 +21,14 @@ var dl = (a, b) => {
 		f.on("finish", () => {
 			f.close(() => {
 				
-				c++;
+				downloadedFileCounter++;
 				file_list.push(b);
-				var pct = Math.ceil((c / cmd.number) * 100);
+				var pct = Math.ceil((downloadedFileCounter / cmd.number) * 100);
 				rdl.cursorTo(process.stdout, 0);
 				process.stdout.write(
-					"Downloaded " + c + " of " + cmd.number + ". [" + pct + " %]",
+					"Downloaded " + downloadedFileCounter + " of " + cmd.number + ". [" + pct + " %]",
 				);
-				if (c === cmd.number) {
+				if (downloadedFileCounter === cmd.number) {
 					console.info("\n" + cmd.number + " image(s) successfully downloaded");
 				}
 			});
