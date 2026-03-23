@@ -57,9 +57,9 @@ var generateRandomFileName = (fileNumber) => (
 		randomString({ length: 4 }) +
 		i +
 		randomString({ length: 4 }) +
-		rdm({ length: 4 }) +
+		randomString({ length: 4 }) +
 		fileNumber +
-		rdm({ length: 4 }) +
+		randomString({ length: 4 }) +
 		".jpg"
 	);
 for (i = 1; i <= cmd.number; i++) {
