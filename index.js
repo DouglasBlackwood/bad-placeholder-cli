@@ -49,15 +49,15 @@ var downloadPlaceHolder = (a, b) => {
 };
 fr.maxRedirects = 10;
 // Generate a randome file name
-var genfname = (i) => (
+var generateRandomFileName = (fileNumber) => (
 		"placeholder_" +
 		cmd.size +
 		"_" +
 		rdm({ length: 4 }) +
-		i +
+		fileNumber +
 		rdm({ length: 4 }) +
 		".jpg"
 	);
 for (i = 1; i <= cmd.number; i++) {
-	downloadPlaceHolder(img.getImgUrl(cmd.size), genfname(i));
+	downloadPlaceHolder(img.getImgUrl(cmd.size), generateRandomFileName(i));
 }
