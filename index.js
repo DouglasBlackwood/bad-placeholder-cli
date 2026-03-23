@@ -13,7 +13,7 @@ var downloadedFileCounter = 0;
 // List of files downloaded
 var file_list = [];
 // Download an image
-var downloadPlaceHolder = (a, b) => {
+var downloadPlaceHolder = (imageUrl, imageName) => {
 	
 	var f = fs.createWriteStream(b);
 	var handle = (r) => {
@@ -37,12 +37,12 @@ var downloadPlaceHolder = (a, b) => {
 			console.log("Failed");
 		});
 	};
-	if (a.substring(0, 7) === "http://") {
-		http.get(a, (r) => {
+	if (imageUrl.substring(0, 7) === "http://") {
+		http.get(imageUrl, (r) => {
 			handle(r);
 		});
 	} else {
-		https.get(a, (r) => {
+		https.get(imageUrl, (r) => {
 			handle(r);
 		});
 	}
