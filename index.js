@@ -38,12 +38,12 @@ var downloadPlaceHolder = (a, b) => {
 		});
 	};
 	if (a.substring(0, 7) === "http://") {
-		http.get(a, (r) => {
-			handle(r);
+		http.get(a, (request) => {
+			handle(request);
 		});
 	} else {
-		https.get(a, (r) => {
-			handle(r);
+		https.get(a, (request) => {
+			handle(request);
 		});
 	}
 };
