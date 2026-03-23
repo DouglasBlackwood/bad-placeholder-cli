@@ -16,7 +16,6 @@ var file_list = [];
 var downloadPlaceHolder = (a, b) => {
 	
 	var fileStream = fileSystem.createWriteStream(b);
-	var fileStream = fileSystem.createWriteStream(b);
 	var handle = (response) => {
 		response.pipe(fileStream);
 		fileStream.on("finish", () => {
@@ -55,13 +54,13 @@ var generateRandomFileName = (fileNumber) => (
 		cmd.size +
 		"_" +
 		randomString({ length: 4 }) +
-		i +
+		fileNumber +
 		randomString({ length: 4 }) +
 		randomString({ length: 4 }) +
 		fileNumber +
 		randomString({ length: 4 }) +
 		".jpg"
 	);
-for (i = 1; i <= cmd.number; i++) {
-	downloadPlaceHolder(img.getImgUrl(cmd.size), generateRandomFileName(i));
+for (fileNumber = 1; fileNumber <= cmd.number; fileNumber++) {
+	downloadPlaceHolder(img.getImgUrl(cmd.size), generateRandomFileName(fileNumber));
 }
