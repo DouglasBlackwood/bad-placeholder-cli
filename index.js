@@ -9,10 +9,11 @@ var rdl = require("readline");
 /* Require Commander configuration */
 var cmd = require("./commanderConfig");
 // Counter of files downloaded
-var c = 0;
+var downloadedFileCounter = 0;
 // List of files downloaded
 var file_list = [];
 // Download an image
+<<<<<<< HEAD
 <<<<<<< HEAD
 var dl = function (a, b) {
 	"use strict";
@@ -24,6 +25,9 @@ var dl = function (a, b) {
 				"use strict";
 =======
 var dl = (a, b) => {
+=======
+var downloadPlaceHolder = (a, b) => {
+>>>>>>> 320dc835b13e35b92f09b31dce3c652769d52465
 	
 	var f = fs.createWriteStream(b);
 	var handle = (r) => {
@@ -31,15 +35,19 @@ var dl = (a, b) => {
 		f.on("finish", () => {
 			f.close(() => {
 				
+<<<<<<< HEAD
 >>>>>>> 248ffcdc50c6d7af5640eb076f71251038b62ba7
 				c++;
+=======
+				downloadedFileCounter++;
+>>>>>>> 320dc835b13e35b92f09b31dce3c652769d52465
 				file_list.push(b);
-				var pct = Math.ceil((c / cmd.number) * 100);
+				var pct = Math.ceil((downloadedFileCounter / cmd.number) * 100);
 				rdl.cursorTo(process.stdout, 0);
 				process.stdout.write(
-					"Downloaded " + c + " of " + cmd.number + ". [" + pct + " %]",
+					"Downloaded " + downloadedFileCounter + " of " + cmd.number + ". [" + pct + " %]",
 				);
-				if (c === cmd.number) {
+				if (downloadedFileCounter === cmd.number) {
 					console.info("\n" + cmd.number + " image(s) successfully downloaded");
 				}
 			});
@@ -92,5 +100,5 @@ var genfname = (i) => (
 =======
 >>>>>>> 248ffcdc50c6d7af5640eb076f71251038b62ba7
 for (i = 1; i <= cmd.number; i++) {
-	dl(img.getImgUrl(cmd.size), genfname(i));
+	downloadPlaceHolder(img.getImgUrl(cmd.size), genfname(i));
 }
