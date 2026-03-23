@@ -7,7 +7,7 @@ var randomString = require("random-string");
 var image = require("./Image");
 var readline = require("readline");
 /* Require Commander configuration */
-var requestedImages = require("./commanderConfig");
+var cliOptions = require("./commanderConfig");
 // Counter of files downloaded
 var downloadedFileCounter = 0;
 // List of files downloaded
@@ -21,22 +21,20 @@ var downloadPlaceHolder = (a, b) => {
       f.close(() => {
         downloadedFileCounter++;
         file_list.push(b);
-        var pct = Math.ceil(
-          (downloadedFileCounter / requestedImages.number) * 100,
-        );
+        var pct = Math.ceil((downloadedFileCounter / cliOptions.number) * 100);
         readline.cursorTo(process.stdout, 0);
         process.stdout.write(
           "Downloaded " +
             downloadedFileCounter +
             " of " +
-            requestedImages.number +
+            cliOptions.number +
             ". [" +
             pct +
             " %]",
         );
-        if (downloadedFileCounter === requestedImages.number) {
+        if (downloadedFileCounter === cliOptions.number) {
           console.info(
-            "\n" + requestedImages.number + " image(s) successfully downloaded",
+            "\n" + cliOptions.number + " image(s) successfully downloaded",
           );
         }
       });
@@ -59,12 +57,12 @@ fr.maxRedirects = 10;
 // Generate a random file name
 var genfname = (i) =>
   "placeholder_" +
-  requestedImages.size +
+  cliOptions.size +
   "_" +
   randomString({ length: 4 }) +
   i +
   randomString({ length: 4 }) +
   ".jpg";
-for (i = 1; i <= requestedImages.number; i++) {
-  downloadPlaceHolder(image.getImgUrl(requestedImages.size), genfname(i));
+for (i = 1; i <= cliOptions.number; i++) {
+  downloadPlaceHolder(image.getImgUrl(cliOptions.size), genfname(i));
 }
