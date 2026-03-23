@@ -11,9 +11,9 @@ var cmd = require("./commanderConfig");
 // Counter of files downloaded
 var downloadedFileCounter = 0;
 // List of files downloaded
-var file_list = [];
+var imagesList = [];
 // Download an image
-var dl = (a, b) => {
+var downloadPlaceHolder = (a, b) => {
 	
 	var f = fs.createWriteStream(b);
 	var handle = (r) => {
@@ -22,7 +22,7 @@ var dl = (a, b) => {
 			f.close(() => {
 				
 				downloadedFileCounter++;
-				file_list.push(b);
+				imagesList.push(b);
 				var pct = Math.ceil((downloadedFileCounter / cmd.number) * 100);
 				rdl.cursorTo(process.stdout, 0);
 				process.stdout.write(
@@ -59,5 +59,5 @@ var genfname = (i) => (
 		".jpg"
 	);
 for (i = 1; i <= cmd.number; i++) {
-	dl(img.getImgUrl(cmd.size), genfname(i));
+	downloadPlaceHolder(img.getImgUrl(cmd.size), genfname(i));
 }
