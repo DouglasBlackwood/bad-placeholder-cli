@@ -21,20 +21,20 @@ module.exports = {
 			},
 		},
 	},
-	provider: "random",
+	currentProvider: "random",
 	getPrvd: function () {
 		
 		// Select random image provider
-		if (this.provider === "random") {
+		if (this.currentProvider === "random") {
 			var l = Object.keys(this.list);
 			var i = Math.floor(Math.random() * l.length);
 			return l[i];
 		}
-		return this.provider;
+		return this.currentProvider;
 	},
-	setPrvd: function (provider) {
+	setPrvd: function (currentProvider) {
 		
-		this.prvd = provider;
+		this.currentProvider = currentProvider;
 	},
 	getImgUrl: function (size) {
 		
