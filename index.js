@@ -15,8 +15,8 @@ var file_list = [];
 // Download an image
 var downloadPlaceHolder = (a, b) => {
 	
-	var f = fileSystem.createWriteStream(b);
-	var fileStream = fs.createWriteStream(b);
+	var fileStream = fileSystem.createWriteStream(b);
+	var fileStream = fileSystem.createWriteStream(b);
 	var handle = (response) => {
 		response.pipe(fileStream);
 		fileStream.on("finish", () => {
