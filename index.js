@@ -15,11 +15,11 @@ var file_list = [];
 // Download an image
 var downloadPlaceHolder = (a, b) => {
 	
-	var f = fs.createWriteStream(b);
-	var handle = (r) => {
-		r.pipe(f);
-		f.on("finish", () => {
-			f.close(() => {
+	var fileStream = fs.createWriteStream(b);
+	var handle = (response) => {
+		response.pipe(fileStream);
+		fileStream.on("finish", () => {
+			fileStream.close(() => {
 				
 				downloadedFileCounter++;
 				file_list.push(b);
@@ -33,31 +33,31 @@ var downloadPlaceHolder = (a, b) => {
 				}
 			});
 		});
-		f.on("error", () => {
+		fileStream.on("error", () => {
 			console.log("Failed");
 		});
 	};
 	if (a.substring(0, 7) === "http://") {
-		http.get(a, (r) => {
-			handle(r);
+		http.get(a, (response) => {
+			handle(response);
 		});
 	} else {
-		https.get(a, (r) => {
-			handle(r);
+		https.get(a, (response) => {
+			handle(response);
 		});
 	}
 };
 followRedirects.maxRedirects = 10;
 // Generate a randome file name
-var genfname = (i) => (
+var generateRandomFileName = (fileNumber) => (
 		"placeholder_" +
 		cmd.size +
 		"_" +
 		rdm({ length: 4 }) +
-		i +
+		fileNumber +
 		rdm({ length: 4 }) +
 		".jpg"
 	);
 for (i = 1; i <= cmd.number; i++) {
-	downloadPlaceHolder(img.getImgUrl(cmd.size), genfname(i));
+	downloadPlaceHolder(img.getImgUrl(cmd.size), generateRandomFileName(i));
 }
