@@ -13,7 +13,7 @@ var downloadedFileCounter = 0;
 // List of files downloaded
 var file_list = [];
 // Download an image
-var dl = (a, b) => {
+var downloadPlaceHolder = (a, b) => {
 	
 	var f = fs.createWriteStream(b);
 	var handle = (r) => {
@@ -59,5 +59,5 @@ var genfname = (i) => (
 		".jpg"
 	);
 for (i = 1; i <= cmd.number; i++) {
-	dl(img.getImgUrl(cmd.size), genfname(i));
+	downloadPlaceHolder(img.getImgUrl(cmd.size), genfname(i));
 }
