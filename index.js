@@ -16,8 +16,8 @@ var file_list = [];
 var downloadPlaceHolder = (a, b) => {
 	
 	var fileStream = fs.createWriteStream(b);
-	var handle = (r) => {
-		r.pipe(fileStream);
+	var handle = (response) => {
+		response.pipe(fileStream);
 		fileStream.on("finish", () => {
 			fileStream.close(() => {
 				
@@ -38,12 +38,12 @@ var downloadPlaceHolder = (a, b) => {
 		});
 	};
 	if (a.substring(0, 7) === "http://") {
-		http.get(a, (request) => {
-			handle(request);
+		http.get(a, (response) => {
+			handle(response);
 		});
 	} else {
-		https.get(a, (request) => {
-			handle(request);
+		https.get(a, (response) => {
+			handle(response);
 		});
 	}
 };
