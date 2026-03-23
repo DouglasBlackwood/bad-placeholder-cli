@@ -13,14 +13,14 @@ var c = 0;
 // List of files downloaded
 var file_list = [];
 // Download an image
-var dl = function (a, b) {
-	"use strict";
+var dl = (a, b) => {
+	
 	var f = fs.createWriteStream(b);
-	var handle = function (r) {
+	var handle = (r) => {
 		r.pipe(f);
-		f.on("finish", function () {
-			f.close(function () {
-				"use strict";
+		f.on("finish", () => {
+			f.close(() => {
+				
 				c++;
 				file_list.push(b);
 				var pct = Math.ceil((c / cmd.number) * 100);
@@ -33,25 +33,23 @@ var dl = function (a, b) {
 				}
 			});
 		});
-		f.on("error", function () {
+		f.on("error", () => {
 			console.log("Failed");
 		});
 	};
 	if (a.substring(0, 7) === "http://") {
-		http.get(a, function (r) {
+		http.get(a, (r) => {
 			handle(r);
 		});
 	} else {
-		https.get(a, function (r) {
+		https.get(a, (r) => {
 			handle(r);
 		});
 	}
 };
 fr.maxRedirects = 10;
 // Generate a randome file name
-var genfname = function (i) {
-	"use strict";
-	return (
+var genfname = (i) => (
 		"placeholder_" +
 		cmd.size +
 		"_" +
@@ -60,7 +58,6 @@ var genfname = function (i) {
 		rdm({ length: 4 }) +
 		".jpg"
 	);
-};
 for (i = 1; i <= cmd.number; i++) {
 	dl(img.getImgUrl(cmd.size), genfname(i));
 }

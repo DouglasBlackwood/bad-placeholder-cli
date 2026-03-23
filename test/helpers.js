@@ -1,14 +1,12 @@
 var fs = require("fs");
 
 module.exports = {
-	getRootFiles: function () {
-		return fs.readdirSync("./");
-	},
+	getRootFiles: () => fs.readdirSync("./"),
 
 	getPlaceholders: function () {
 		var files = this.getRootFiles();
 
-		return files.filter(function (filename) {
+		return files.filter((filename) => {
 			if (filename.indexOf("placeholder_") !== -1) {
 				return filename;
 			}
@@ -19,9 +17,9 @@ module.exports = {
 		var placeholders = this.getPlaceholders();
 		var count = placeholders.length;
 
-		return new Promise(function (resolve, reject) {
+		return new Promise((resolve, reject) => {
 			if (count) {
-				placeholders.forEach(function (filename) {
+				placeholders.forEach((filename) => {
 					fs.unlinkSync(filename);
 					count--;
 
@@ -35,7 +33,5 @@ module.exports = {
 		});
 	},
 
-	getDimensions: function (filename) {
-		return filename.split("_")[1];
-	},
+	getDimensions: (filename) => filename.split("_")[1],
 };
