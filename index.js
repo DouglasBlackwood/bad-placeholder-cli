@@ -11,7 +11,7 @@ var cmd = require("./commanderConfig");
 // Counter of files downloaded
 var downloadedFileCounter = 0;
 // List of files downloaded
-var imagesList = [];
+var downloadedFileList = [];
 // Download an image
 var downloadPlaceHolder = (a, b) => {
 	
@@ -22,7 +22,7 @@ var downloadPlaceHolder = (a, b) => {
 			fileStream.close(() => {
 				
 				downloadedFileCounter++;
-				imagesList.push(b);
+				downloadedFileList.push(b);
 				var pct = Math.ceil((downloadedFileCounter / cmd.number) * 100);
 				rdl.cursorTo(process.stdout, 0);
 				process.stdout.write(
