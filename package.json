@@ -28,6 +28,10 @@
 		"random-string": "^0.1.2"
 	},
 	"devDependencies": {
+<<<<<<< HEAD
+=======
+		"@biomejs/biome": "2.4.8",
+>>>>>>> 248ffcdc50c6d7af5640eb076f71251038b62ba7
 		"chai": "^5.2.0",
 		"execa": "^1.0.0",
 		"mocha": "^11.1.0"
