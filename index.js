@@ -14,11 +14,13 @@ var downloadedFileCounter = 0;
 var imagesList = [];
 // Download an image
 var downloadPlaceHolder = (a, b) => {
-	var f = fs.createWriteStream(b);
+	
+	var fileStream = fs.createWriteStream(b);
 	var handle = (r) => {
-		r.pipe(f);
-		f.on("finish", () => {
-			f.close(() => {
+		r.pipe(fileStream);
+		fileStream.on("finish", () => {
+			fileStream.close(() => {
+				
 				downloadedFileCounter++;
 				imagesList.push(b);
 				var pct = Math.ceil((downloadedFileCounter / cmd.number) * 100);
@@ -37,7 +39,7 @@ var downloadPlaceHolder = (a, b) => {
 				}
 			});
 		});
-		f.on("error", () => {
+		fileStream.on("error", () => {
 			console.log("Failed");
 		});
 	};
