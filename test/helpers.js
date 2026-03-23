@@ -1,41 +1,37 @@
-var fs = require('fs');
+var fs = require("fs");
 
 module.exports = {
-  getRootFiles: function () {
-    return fs.readdirSync('./');
-  },
+	getRootFiles: () => fs.readdirSync("./"),
 
-  getPlaceholders: function () {
-    var files = this.getRootFiles();
+	getPlaceholders: function () {
+		var files = this.getRootFiles();
 
-    return files.filter(function (filename) {
-      if (filename.indexOf('placeholder_') !== -1) {
-        return filename
-      }
-    });
-  },
+		return files.filter((filename) => {
+			if (filename.indexOf("placeholder_") !== -1) {
+				return filename;
+			}
+		});
+	},
 
-  deletePlaceholders: function () {
-    var placeholders = this.getPlaceholders();
-    var count = placeholders.length;
+	deletePlaceholders: function () {
+		var placeholders = this.getPlaceholders();
+		var count = placeholders.length;
 
-    return new Promise(function (resolve, reject) {
-      if (count) {
-        placeholders.forEach(function (filename) {
-          fs.unlinkSync(filename);
-          count--;
+		return new Promise((resolve, reject) => {
+			if (count) {
+				placeholders.forEach((filename) => {
+					fs.unlinkSync(filename);
+					count--;
 
-          if (!count) {
-            resolve();
-          }
-        });
-      }
+					if (!count) {
+						resolve();
+					}
+				});
+			}
 
-      resolve();
-    });
-  },
+			resolve();
+		});
+	},
 
-  getDimensions: function (filename) {
-    return filename.split('_')[1];
-  }
+	getDimensions: (filename) => filename.split("_")[1],
 };
