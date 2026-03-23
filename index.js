@@ -2,8 +2,8 @@
 var followRedirects = require("follow-redirects");
 var http = followRedirects.http;
 var https = followRedirects.https;
-var fs = require("fs");
-var rdm = require("random-string");
+var fileSystem = require("fs");
+var randomString = require("random-string");
 var img = require("./Image");
 var rdl = require("readline");
 /* Require Commander configuration */
@@ -15,7 +15,7 @@ var file_list = [];
 // Download an image
 var downloadPlaceHolder = (a, b) => {
 	
-	var f = fs.createWriteStream(b);
+	var f = fileSystem.createWriteStream(b);
 	var handle = (r) => {
 		r.pipe(f);
 		f.on("finish", () => {
@@ -53,9 +53,9 @@ var genfname = (i) => (
 		"placeholder_" +
 		cmd.size +
 		"_" +
-		rdm({ length: 4 }) +
+		randomString({ length: 4 }) +
 		i +
-		rdm({ length: 4 }) +
+		randomString({ length: 4 }) +
 		".jpg"
 	);
 for (i = 1; i <= cmd.number; i++) {
