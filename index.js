@@ -4,8 +4,8 @@ var http = fr.http;
 var https = fr.https;
 var fs = require("fs");
 var randomString = require("random-string");
-var bearImage = require("./Image");
-var readLine = require("readline");
+var image = require("./Image");
+var readline = require("readline");
 /* Require Commander configuration */
 var requestedImages = require("./commanderConfig");
 // Counter of files downloaded
@@ -24,7 +24,7 @@ var downloadPlaceHolder = (a, b) => {
         var pct = Math.ceil(
           (downloadedFileCounter / requestedImages.number) * 100,
         );
-        readLine.cursorTo(process.stdout, 0);
+        readline.cursorTo(process.stdout, 0);
         process.stdout.write(
           "Downloaded " +
             downloadedFileCounter +
@@ -66,5 +66,5 @@ var genfname = (i) =>
   randomString({ length: 4 }) +
   ".jpg";
 for (i = 1; i <= requestedImages.number; i++) {
-  downloadPlaceHolder(bearImage.getImgUrl(requestedImages.size), genfname(i));
+  downloadPlaceHolder(image.getImgUrl(requestedImages.size), genfname(i));
 }
