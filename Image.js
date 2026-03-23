@@ -26,9 +26,9 @@ module.exports = {
 		
 		// Select random image provider
 		if (this.currentProvider === "random") {
-			var objectList = Object.keys(this.list);
-			var randomIndex = Math.floor(Math.random() * objectList.length);
-			return objectList[randomIndex];
+			var providersList = Object.keys(this.list);
+			var randomIndex = Math.floor(Math.random() * providersList.length);
+			return providersList[randomIndex];
 		}
 		return this.currentProvider;
 	},
