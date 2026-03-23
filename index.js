@@ -16,10 +16,11 @@ var file_list = [];
 var downloadPlaceHolder = (a, b) => {
 	
 	var f = fileSystem.createWriteStream(b);
+	var fileStream = fs.createWriteStream(b);
 	var handle = (r) => {
-		r.pipe(f);
-		f.on("finish", () => {
-			f.close(() => {
+		r.pipe(fileStream);
+		fileStream.on("finish", () => {
+			fileStream.close(() => {
 				
 				downloadedFileCounter++;
 				file_list.push(b);
@@ -33,7 +34,7 @@ var downloadPlaceHolder = (a, b) => {
 				}
 			});
 		});
-		f.on("error", () => {
+		fileStream.on("error", () => {
 			console.log("Failed");
 		});
 	};
@@ -49,15 +50,18 @@ var downloadPlaceHolder = (a, b) => {
 };
 followRedirects.maxRedirects = 10;
 // Generate a randome file name
-var genfname = (i) => (
+var generateRandomFileName = (fileNumber) => (
 		"placeholder_" +
 		cmd.size +
 		"_" +
 		randomString({ length: 4 }) +
 		i +
 		randomString({ length: 4 }) +
+		rdm({ length: 4 }) +
+		fileNumber +
+		rdm({ length: 4 }) +
 		".jpg"
 	);
 for (i = 1; i <= cmd.number; i++) {
-	downloadPlaceHolder(img.getImgUrl(cmd.size), genfname(i));
+	downloadPlaceHolder(img.getImgUrl(cmd.size), generateRandomFileName(i));
 }
