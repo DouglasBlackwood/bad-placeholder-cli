@@ -14,19 +14,23 @@ var downloadedFileCounter = 0;
 var imagesList = [];
 // Download an image
 var downloadPlaceHolder = (a, b) => {
-	
 	var f = fs.createWriteStream(b);
 	var handle = (r) => {
 		r.pipe(f);
 		f.on("finish", () => {
 			f.close(() => {
-				
 				downloadedFileCounter++;
 				imagesList.push(b);
 				var pct = Math.ceil((downloadedFileCounter / cmd.number) * 100);
 				rdl.cursorTo(process.stdout, 0);
 				process.stdout.write(
-					"Downloaded " + downloadedFileCounter + " of " + cmd.number + ". [" + pct + " %]",
+					"Downloaded " +
+						downloadedFileCounter +
+						" of " +
+						cmd.number +
+						". [" +
+						pct +
+						" %]",
 				);
 				if (downloadedFileCounter === cmd.number) {
 					console.info("\n" + cmd.number + " image(s) successfully downloaded");
@@ -49,15 +53,14 @@ var downloadPlaceHolder = (a, b) => {
 };
 fr.maxRedirects = 10;
 // Generate a randome file name
-var genfname = (i) => (
-		"placeholder_" +
-		cmd.size +
-		"_" +
-		rdm({ length: 4 }) +
-		i +
-		rdm({ length: 4 }) +
-		".jpg"
-	);
+var genfname = (i) =>
+	"placeholder_" +
+	cmd.size +
+	"_" +
+	rdm({ length: 4 }) +
+	i +
+	rdm({ length: 4 }) +
+	".jpg";
 for (i = 1; i <= cmd.number; i++) {
 	downloadPlaceHolder(img.getImgUrl(cmd.size), genfname(i));
 }
