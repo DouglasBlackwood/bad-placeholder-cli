@@ -1,27 +1,27 @@
 #! /usr/bin/env node
-const fr = require("follow-redirects");
-const http = fr.http;
-const https = fr.https;
-const fs = require("fs");
-const rdm = require("random-string");
-const img = require("./Image");
-const rdl = require("readline");
-const cmd = require("./commanderConfig");
+const followRedirects = require("follow-redirects");
+const http = followRedirects.http;
+const https = followRedirects.https;
+const fileSystem = require("fs");
+const randomString = require("random-string");
+const image = require("./Image");
+const readline = require("readline");
+const cliOptions = require("./commanderConfig");
 
-fr.maxRedirects = 10;
+followRedirects.maxRedirects = 10;
 
 let downloadedFileCounter = 0;
-const file_list = [];
+const downloadedFiles = [];
 
 function printProgress() {
-	const pct = Math.ceil((downloadedFileCounter / cmd.number) * 100);
-	rdl.cursorTo(process.stdout, 0);
+	const pct = Math.ceil((downloadedFileCounter / cliOptions.number) * 100);
+	readline.cursorTo(process.stdout, 0);
 	process.stdout.write(
-		`Downloaded ${downloadedFileCounter} of ${cmd.number}. [${pct} %]`,
+		`Downloaded ${downloadedFileCounter} of ${cliOptions.number}. [${pct} %]`,
 	);
 
-	if (downloadedFileCounter === cmd.number) {
-		console.info(`\n${cmd.number} image(s) successfully downloaded`);
+	if (downloadedFileCounter === cliOptions.number) {
+		console.info(`\n${cliOptions.number} image(s) successfully downloaded`);
 	}
 }
 
@@ -31,7 +31,7 @@ function handleResponse(response, fileStream, b) {
 	fileStream.on("finish", () => {
 		fileStream.close(() => {
 			downloadedFileCounter++;
-			file_list.push(b);
+			downloadedFiles.push(b);
 			printProgress();
 		});
 	});
@@ -42,7 +42,7 @@ function handleResponse(response, fileStream, b) {
 }
 
 function downloadPlaceHolder(a, b) {
-	const fileStream = fs.createWriteStream(b);
+	const fileStream = fileSystem.createWriteStream(b);
 	const protocol = a.startsWith("http://") ? http : https;
 
 	protocol.get(a, (response) => {
@@ -53,9 +53,9 @@ function downloadPlaceHolder(a, b) {
 }
 
 function generateRandomFileName(fileNumber) {
-	return `placeholder_${cmd.size}_${rdm({ length: 4 })}${fileNumber}${rdm({ length: 4 })}.jpg`;
+	return `placeholder_${cliOptions.size}_${randomString({ length: 4 })}${fileNumber}${randomString({ length: 4 })}.jpg`;
 }
 
-for (let i = 1; i <= cmd.number; i++) {
-	downloadPlaceHolder(img.getImgUrl(cmd.size), generateRandomFileName(i));
+for (let i = 1; i <= cliOptions.number; i++) {
+	downloadPlaceHolder(image.getImgUrl(cliOptions.size), generateRandomFileName(i));
 }
