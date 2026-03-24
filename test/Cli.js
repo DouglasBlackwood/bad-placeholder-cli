@@ -7,9 +7,7 @@ describe("bad-placeholder -n 3", () => {
 	var _result;
 
 	before((done) => {
-		helpers.deletePlaceholders().then((_response) => {
-			done();
-		});
+		helpers.deletePlaceholders().then((_response) => {});
 		execa
 			.shell("node ./index.js -n 3")
 			.then((response) => {
@@ -38,9 +36,7 @@ describe("bad-placeholder -s 100x100", () => {
 	var _result;
 
 	before((done) => {
-		helpers.deletePlaceholders().then((_response) => {
-			done();
-		});
+		helpers.deletePlaceholders().then((_response) => {});
 		execa
 			.shell("node ./index.js -s 100x100")
 			.then((response) => {
@@ -70,9 +66,7 @@ for (const provider of ["DummyImage", "LoremPicsum", "PlaceBear"]) {
 		var _result;
 
 		before((done) => {
-			helpers.deletePlaceholders().then((_response) => {
-				done();
-			});
+			helpers.deletePlaceholders().then((_response) => {});
 			execa
 				.shell(`node ./index.js -p ${provider}`)
 				.then((response) => {
