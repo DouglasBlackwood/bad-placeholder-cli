@@ -1,47 +1,46 @@
-var fs = require("fs");
-var cmd = require("commander");
-var img = require("./Image");
+var commander = require("commander");
+var image = require("./Image");
 // The version should be the same as the package.json version, keep it in sync
-module.exports = cmd
+module.exports = commander
 	.version("1.11.0", "-v, --version")
 	.option(
 		"-n, --number [integer]",
 		"Number of files to generate",
-		(n) => {
+		(numberOfGeneratedFile) => {
 			
-			var n2 = parseInt(n);
-			// n should be a valid number
-			if (isNaN(n2)) {
+			var isNumberValid = parseInt(numberOfGeneratedFile);
+			// numberOfGeneratedFile should be a valid number
+			if (isNaN(isNumberValid)) {
 				return 1;
 			}
-			return n2;
+			return isNumberValid;
 		},
 		1,
 	)
 	.option(
 		"-s, --size [1024x768]",
 		"Image size",
-		(s) => {
+		(sizeOfImage) => {
 			
 			// Check for an "x" in the string
 			// and if not, return the default size
 			// 1024x768
-			if (s.indexOf("x") === -1) {
+			if (sizeOfImage.indexOf("x") === -1) {
 				return "1024x768";
 			}
-			return s;
+			return sizeOfImage;
 		},
 		"1024x768",
 	)
 	.option(
 		"-p, --provider [provider]",
-		"Set the image provider; " + Object.keys(img.list).join(", "),
-		(p) => {
+		"Set the image provider; " + Object.keys(image.list).join(", "),
+		(provider) => {
 			
 			// Set image provider
-			img.setPrvd(p);
-			return p;
+			image.setPrvd(provider);
+			return provider;
 		},
-		img.setPrvd("random"),
+		image.setPrvd("random"),
 	)
 	.parse(process.argv);
