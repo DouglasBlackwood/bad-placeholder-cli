@@ -13,16 +13,16 @@ var downloadedFileCounter = 0;
 // List of files downloaded
 var file_list = [];
 // Download an image
-var downloadPlaceHolder = (a, b) => {
+var downloadPlaceHolder = (imageUrl, imageFileName) => {
 	
-	var fileStream = fs.createWriteStream(b);
+	var fileStream = fs.createWriteStream(imageFileName);
 	var handle = (response) => {
 		response.pipe(fileStream);
 		fileStream.on("finish", () => {
 			fileStream.close(() => {
 				
 				downloadedFileCounter++;
-				file_list.push(b);
+				file_list.push(imageFileName);
 				var downloadProgress = Math.ceil((downloadedFileCounter / cmd.number) * 100);
 				rdl.cursorTo(process.stdout, 0);
 				process.stdout.write(
@@ -37,12 +37,12 @@ var downloadPlaceHolder = (a, b) => {
 			console.log("Failed");
 		});
 	};
-	if (a.substring(0, 7) === "http://") {
-		http.get(a, (response) => {
+	if (imageUrl.substring(0, 7) === "http://") {
+		http.get(imageUrl, (response) => {
 			handle(response);
 		});
 	} else {
-		https.get(a, (response) => {
+		https.get(imageUrl, (response) => {
 			handle(response);
 		});
 	}
