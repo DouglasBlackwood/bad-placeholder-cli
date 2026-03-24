@@ -1,109 +1,61 @@
 #! /usr/bin/env node
-var followRedirects = require("follow-redirects");
-var http = followRedirects.http;
-var https = followRedirects.https;
-var fileSystem = require("fs");
-var randomString = require("random-string");
-var image = require("./Image");
-var readline = require("readline");
-/* Require Commander configuration */
-var cliOptions = require("./commanderConfig");
+const fr = require("follow-redirects");
+const http = fr.http;
+const https = fr.https;
+const fs = require("fs");
+const rdm = require("random-string");
+const img = require("./Image");
+const rdl = require("readline");
+const cmd = require("./commanderConfig");
 
-// Counter of files downloaded
-var downloadedFileCounter = 0;
-// List of files downloaded
-var downloadedFiles = [];
+fr.maxRedirects = 10;
 
-function pipeResponseToFile(response, fileStream) {
-	response.pipe(fileStream);
-}
+let downloadedFileCounter = 0;
+const file_list = [];
 
-function updateDownloadState(imageFileName) {
-	downloadedFileCounter++;
-	downloadedFiles.push(imageFileName);
-}
-
-function renderProgress() {
-	var downloadProgress = Math.ceil(
-		(downloadedFileCounter / cliOptions.number) * 100
-	);
-
-	readline.cursorTo(process.stdout, 0);
+function printProgress() {
+	const pct = Math.ceil((downloadedFileCounter / cmd.number) * 100);
+	rdl.cursorTo(process.stdout, 0);
 	process.stdout.write(
-		"Downloaded " +
-			downloadedFileCounter +
-			" of " +
-			cliOptions.number +
-			". [" +
-			downloadProgress +
-			" %]"
+		`Downloaded ${downloadedFileCounter} of ${cmd.number}. [${pct} %]`,
 	);
-}
 
-function handleDownloadCompletion(imageFileName) {
-	updateDownloadState(imageFileName);
-	renderProgress();
-
-	if (downloadedFileCounter === cliOptions.number) {
-		console.info(
-			"\n" + cliOptions.number + " image(s) successfully downloaded"
-		);
+	if (downloadedFileCounter === cmd.number) {
+		console.info(`\n${cmd.number} image(s) successfully downloaded`);
 	}
 }
 
-function onFileStreamFinish(fileStream, imageFileName) {
-	fileStream.close(function onClose() {
-		handleDownloadCompletion(imageFileName);
-	});
-}
+function handleResponse(response, fileStream, b) {
+	response.pipe(fileStream);
 
-function onFileStreamError() {
-	console.log("Failed");
-}
-
-function attachFileStreamEvents(fileStream, imageFileName) {
-	fileStream.on("finish", function handleFinish() {
-		onFileStreamFinish(fileStream, imageFileName);
-	});
-
-	fileStream.on("error", function handleError() {
-		onFileStreamError();
-	});
-}
-
-function handleResponse(response, fileStream, imageFileName) {
-	pipeResponseToFile(response, fileStream);
-	attachFileStreamEvents(fileStream, imageFileName);
-}
-
-var downloadPlaceHolder = (imageUrl, imageFileName) => {
-	var fileStream = fileSystem.createWriteStream(imageFileName);
-
-	if (imageUrl.substring(0, 7) === "http://") {
-		http.get(imageUrl, function onHttpResponse(response) {
-			handleResponse(response, fileStream, imageFileName);
+	fileStream.on("finish", () => {
+		fileStream.close(() => {
+			downloadedFileCounter++;
+			file_list.push(b);
+			printProgress();
 		});
-	} else {
-		https.get(imageUrl, function onHttpsResponse(response) {
-			handleResponse(response, fileStream, imageFileName);
-		});
-	}
-};
+	});
 
-followRedirects.maxRedirects = 10;
+	fileStream.on("error", (err) => {
+		console.error(`Failed to write ${b}: ${err.message}`);
+	});
+}
 
-var generateRandomFileName = (fileNumber) =>
-	"placeholder_" +
-	cliOptions.size +
-	"_" +
-	randomString({ length: 4 }) +
-	fileNumber +
-	randomString({ length: 4 }) +
-	".jpg";
+function downloadPlaceHolder(a, b) {
+	const fileStream = fs.createWriteStream(b);
+	const protocol = a.startsWith("http://") ? http : https;
 
-for (i = 1; i <= cliOptions.number; i++) {
-	downloadPlaceHolder(
-		image.getImgUrl(cliOptions.size),
-		generateRandomFileName(i)
-	);
+	protocol.get(a, (response) => {
+		handleResponse(response, fileStream, b);
+	}).on("error", (err) => {
+		console.error(`Failed to download ${a}: ${err.message}`);
+	});
+}
+
+function generateRandomFileName(fileNumber) {
+	return `placeholder_${cmd.size}_${rdm({ length: 4 })}${fileNumber}${rdm({ length: 4 })}.jpg`;
+}
+
+for (let i = 1; i <= cmd.number; i++) {
+	downloadPlaceHolder(img.getImgUrl(cmd.size), generateRandomFileName(i));
 }
