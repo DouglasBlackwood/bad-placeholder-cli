@@ -1,7 +1,7 @@
 #! /usr/bin/env node
-var fr = require("follow-redirects");
-var http = fr.http;
-var https = fr.https;
+var followRedirects = require("follow-redirects");
+var http = followRedirects.http;
+var https = followRedirects.https;
 var fs = require("fs");
 var rdm = require("random-string");
 var img = require("./Image");
@@ -49,7 +49,7 @@ var downloadPlaceHolder = (imageUrl, imageFileName) => {
 		});
 	}
 };
-fr.maxRedirects = 10;
+followRedirects.maxRedirects = 10;
 // Generate a randome file name
 var generateRandomFileName = (fileNumber) => (
 		"placeholder_" +
