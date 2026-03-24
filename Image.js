@@ -21,10 +21,10 @@ module.exports = {
 	},
 	currentProvider: "random",
 	getPrvd: function () {
-		var providers = Object.keys(this.list);
-		var randomIndex = Math.floor(Math.random() * providers.length);
 		// Select random image provider
 		if (this.currentProvider === "random") {
+			let providers = Object.keys(this.list);
+			let randomIndex = Math.floor(Math.random() * providers.length);
 			return providers[randomIndex];
 		}
 		return this.currentProvider;
