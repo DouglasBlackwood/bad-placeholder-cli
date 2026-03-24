@@ -10,7 +10,7 @@ module.exports = {
 			if (filename.indexOf("placeholder_") !== -1) {
 				return filename;
 			}
-			return false;
+			return null;
 		});
 	},
 
