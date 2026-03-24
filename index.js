@@ -2,16 +2,17 @@
 var followRedirects = require("follow-redirects");
 var http = followRedirects.http;
 var https = followRedirects.https;
+// Image provider module
 var fs = require("fs");
-var rdm = require("random-string");
-var img = require("./Image");
-var rdl = require("readline");
+var randomized = require("random-string");
+var image = require("./Image");
+var readline = require("readline");
 /* Require Commander configuration */
-var cmd = require("./commanderConfig");
+var cliOption = require("./commanderConfig");
 // Counter of files downloaded
 var downloadedFileCounter = 0;
 // List of files downloaded
-var file_list = [];
+var downloadedFiles = [];
 // Download an image
 var downloadPlaceHolder = (a, b) => {
 	
@@ -22,14 +23,14 @@ var downloadPlaceHolder = (a, b) => {
 			fileStream.close(() => {
 				
 				downloadedFileCounter++;
-				file_list.push(b);
-				var downloadProgress = Math.ceil((downloadedFileCounter / cmd.number) * 100);
-				rdl.cursorTo(process.stdout, 0);
+				downloadedFiles.push(b);
+				var downloadProgress = Math.ceil((downloadedFileCounter / cliOption.number) * 100);
+				readline.cursorTo(process.stdout, 0);
 				process.stdout.write(
-					"Downloaded " + downloadedFileCounter + " of " + cmd.number + ". [" + downloadProgress + " %]",
+					"Downloaded " + downloadedFileCounter + " of " + cliOption.number + ". [" + downloadProgress + " %]",
 				);
-				if (downloadedFileCounter === cmd.number) {
-					console.info("\n" + cmd.number + " image(s) successfully downloaded");
+				if (downloadedFileCounter === cliOption.number) {
+					console.info("\n" + cliOption.number + " image(s) successfully downloaded");
 				}
 			});
 		});
@@ -51,13 +52,13 @@ followRedirects.maxRedirects = 10;
 // Generate a randome file name
 var generateRandomFileName = (fileNumber) => (
 		"placeholder_" +
-		cmd.size +
+		cliOption.size +
 		"_" +
-		rdm({ length: 4 }) +
+		randomized({ length: 4 }) +
 		fileNumber +
-		rdm({ length: 4 }) +
+		randomized({ length: 4 }) +
 		".jpg"
 	);
-for (i = 1; i <= cmd.number; i++) {
-	downloadPlaceHolder(img.getImgUrl(cmd.size), generateRandomFileName(i));
+for (i = 1; i <= cliOption.number; i++) {
+	downloadPlaceHolder(image.getImgUrl(cliOption.size), generateRandomFileName(i));
 }
