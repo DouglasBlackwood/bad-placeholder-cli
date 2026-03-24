@@ -10,8 +10,6 @@ var readline = require("readline");
 var cliOptions = require("./commanderConfig");
 // Counter of files downloaded
 var downloadedFileCounter = 0;
-// List of files downloaded
-var downloadedFiles = [];
 // Download an image
 var downloadPlaceHolder = (imageUrl, imageFileName) => {
 	
@@ -22,7 +20,6 @@ var downloadPlaceHolder = (imageUrl, imageFileName) => {
 			fileStream.close(() => {
 				
 				downloadedFileCounter++;
-				downloadedFiles.push(imageFileName);
 				var downloadProgress = Math.ceil((downloadedFileCounter / cliOptions.number) * 100);
 				readline.cursorTo(process.stdout, 0);
 				process.stdout.write(
@@ -59,5 +56,5 @@ var generateRandomFileName = (fileNumber) => (
 		".jpg"
 	);
 for (i = 1; i <= cliOptions.number; i++) {
-	downloadPlaceHolder(image.getImgUrl(cliOptions.size), generateRandomFileName(i));
+	downloadPlaceHolder(image.getImageUrl(cliOptions.size), generateRandomFileName(i));
 }

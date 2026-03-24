@@ -39,9 +39,9 @@ module.exports = cmd
 		(p) => {
 			
 			// Set image provider
-			img.setPrvd(p);
+			img.setProvider(p);
 			return p;
 		},
-		img.setPrvd("random"),
+		img.setProvider("random"),
 	)
 	.parse(process.argv);
