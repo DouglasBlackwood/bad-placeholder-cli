@@ -7,16 +7,16 @@ module.exports = {
         // LoremPicsum
         LoremPicsum: {
             getImageUrl: (imageSize) => {
-                var tabImageSize = imageSize.split("x");
-                return "https://picsum.photos/" + tabImageSize[0] + "/" + tabImageSize[1] + "/?random";
+                var imagesize = { width: imageSize.split("x")[0], height: imageSize.split("x")[1] };
+                return "https://picsum.photos/" + imagesize.width + "/" + imagesize.height + "/?random";
             },
         },
         // PlaceBear
         PlaceBear: {
             getImageUrl: (imageSize) => {
 
-                var tabImageSize = imageSize.split("x");
-                return "https://placebear.com/" + tabImageSize[0] + "/" + tabImageSize[1];
+                var imagesize = { width: imageSize.split("x")[0], height: imageSize.split("x")[1] };
+                return "https://placebear.com/" + imagesize.width + "/" + imagesize.height;
             },
         },
     },
@@ -25,9 +25,9 @@ module.exports = {
 
         // Select random image provider
         if (this.currentProvider === "random") {
-            var tabProvider = Object.keys(this.list);
-            var randomNumber = Math.floor(Math.random() * tabProvider.length);
-            return tabProvider[randomNumber];
+            var providers = Object.keys(this.list);
+            var randomIndex = Math.floor(Math.random() * providers.length);
+            return providers[randomIndex];
         }
         return this.currentProvider;
     },
