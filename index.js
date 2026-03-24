@@ -22,7 +22,7 @@ var downloadPlaceHolder = (a, b) => {
 			fileStream.close(() => {
 				
 				downloadedFileCounter++;
-				downloadedFileList.push(b);
+				downloadedFiles.push(b);
 				var downloadProgress = Math.ceil((downloadedFileCounter / cmd.number) * 100);
 				rdl.cursorTo(process.stdout, 0);
 				process.stdout.write(
