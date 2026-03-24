@@ -14,22 +14,30 @@ var downloadedFileCounter = 0;
 var downloadedFiles = [];
 // Download an image
 var downloadPlaceHolder = (imageUrl, imageFileName) => {
-	
 	var fileStream = fileSystem.createWriteStream(imageFileName);
 	var handle = (response) => {
 		response.pipe(fileStream);
 		fileStream.on("finish", () => {
 			fileStream.close(() => {
-				
 				downloadedFileCounter++;
 				downloadedFiles.push(imageFileName);
-				var downloadProgress = Math.ceil((downloadedFileCounter / cliOptions.number) * 100);
+				var downloadProgress = Math.ceil(
+					(downloadedFileCounter / cliOptions.number) * 100,
+				);
 				readline.cursorTo(process.stdout, 0);
 				process.stdout.write(
-					"Downloaded " + downloadedFileCounter + " of " + cliOptions.number + ". [" + downloadProgress + " %]",
+					"Downloaded " +
+						downloadedFileCounter +
+						" of " +
+						cliOptions.number +
+						". [" +
+						downloadProgress +
+						" %]",
 				);
 				if (downloadedFileCounter === cliOptions.number) {
-					console.info("\n" + cliOptions.number + " image(s) successfully downloaded");
+					console.info(
+						"\n" + cliOptions.number + " image(s) successfully downloaded",
+					);
 				}
 			});
 		});
@@ -49,15 +57,17 @@ var downloadPlaceHolder = (imageUrl, imageFileName) => {
 };
 followRedirects.maxRedirects = 10;
 // Generate a randome file name
-var generateRandomFileName = (fileNumber) => (
-		"placeholder_" +
-		cliOptions.size +
-		"_" +
-		randomString({ length: 4 }) +
-		fileNumber +
-		randomString({ length: 4 }) +
-		".jpg"
-	);
+var generateRandomFileName = (fileNumber) =>
+	"placeholder_" +
+	cliOptions.size +
+	"_" +
+	randomString({ length: 4 }) +
+	fileNumber +
+	randomString({ length: 4 }) +
+	".jpg";
 for (i = 1; i <= cliOptions.number; i++) {
-	downloadPlaceHolder(image.getImgUrl(cliOptions.size), generateRandomFileName(i));
+	downloadPlaceHolder(
+		image.getImgUrl(cliOptions.size),
+		generateRandomFileName(i),
+	);
 }

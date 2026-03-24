@@ -4,8 +4,6 @@ var execa = require("execa");
 var helpers = require("./helpers");
 
 describe("bad-placeholder -n 3", () => {
-	
-
 	before((done) => {
 		helpers.deletePlaceholders().then((response) => {
 			done();
@@ -40,8 +38,6 @@ describe("bad-placeholder -n 3", () => {
 });
 
 describe("bad-placeholder -s 100x100", () => {
-	
-
 	before((done) => {
 		helpers.deletePlaceholders().then((response) => {
 			done();
@@ -77,8 +73,6 @@ for (const provider of ["DummyImage", "LoremPicsum", "PlaceBear"]) {
 	("use strict");
 
 	describe("bad-placeholder -p " + provider, () => {
-		
-
 		before((done) => {
 			helpers.deletePlaceholders().then((response) => {
 				done();
