@@ -22,11 +22,13 @@ var downloadPlaceHolder = (imageUrl, imageFileName) => {
 			fileStream.close(() => {
 				
 				downloadedFileCounter++;
+				file_list.push(b);
+				var downloadProgress = Math.ceil((downloadedFileCounter / cmd.number) * 100);
 				file_list.push(imageFileName);
 				var pct = Math.ceil((downloadedFileCounter / cmd.number) * 100);
 				rdl.cursorTo(process.stdout, 0);
 				process.stdout.write(
-					"Downloaded " + downloadedFileCounter + " of " + cmd.number + ". [" + pct + " %]",
+					"Downloaded " + downloadedFileCounter + " of " + cmd.number + ". [" + downloadProgress + " %]",
 				);
 				if (downloadedFileCounter === cmd.number) {
 					console.info("\n" + cmd.number + " image(s) successfully downloaded");
