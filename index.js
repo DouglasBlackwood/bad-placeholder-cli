@@ -11,7 +11,7 @@ var cmd = require("./commanderConfig");
 // Counter of files downloaded
 var downloadedFileCounter = 0;
 // List of files downloaded
-var downloadedFileList = [];
+var downloadedFiles = [];
 // Download an image
 var downloadPlaceHolder = (a, b) => {
 	
