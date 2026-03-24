@@ -2,10 +2,10 @@
 var followRedirects = require("follow-redirects");
 var http = followRedirects.http;
 var https = followRedirects.https;
-var fileSystem = require("fs");
+var fileSystem = require("node:fs");
 var randomString = require("random-string");
 var image = require("./Image");
-var readline = require("readline");
+var readline = require("node:readline");
 /* Require Commander configuration */
 var cliOptions = require("./commanderConfig");
 // Counter of files downloaded
@@ -36,7 +36,7 @@ var downloadPlaceHolder = (imageUrl, imageFileName) => {
 				);
 				if (downloadedFileCounter === cliOptions.number) {
 					console.info(
-						"\n" + cliOptions.number + " image(s) successfully downloaded",
+						`\n${cliOptions.number} image(s) successfully downloaded`,
 					);
 				}
 			});
