@@ -1,30 +1,27 @@
+class Provider {
+	constructor(url) {
+		this.url = url;
+	}
+
+	getImgUrl(s) {
+		const [w, h] = s.split("x");
+		return this.url.replace("{w}", w).replace("{h}", h);
+	}
+}
+
 module.exports = {
 	list: {
-		// DummyImage
-		DummyImage: {
-			getImgUrl: (s) => `https://dummyimage.com/${s}/000/fff`,
-		},
-		// LoremPicsum
-		LoremPicsum: {
-			getImgUrl: (s) => {
-				var s2 = s.split("x");
-				return `https://picsum.photos/${s2[0]}/${s2[1]}/?random`;
-			},
-		},
-		// PlaceBear
-		PlaceBear: {
-			getImgUrl: (s) => {
-				var s2 = s.split("x");
-				return `https://placebear.com/${s2[0]}/${s2[1]}`;
-			},
-		},
+		DummyImage: new Provider("https://dummyimage.com/{w}x{h}/000/fff"),
+		LoremPicsum: new Provider("https://picsum.photos/{w}/{h}/?random"),
+		PlaceBear: new Provider("https://placebear.com/{w}/{h}"),
 	},
+
 	currentProvider: "random",
 	getPrvd: function () {
 		// Select random image provider
 		if (this.currentProvider === "random") {
-			let providers = Object.keys(this.list);
-			let randomIndex = Math.floor(Math.random() * providers.length);
+			const providers = Object.keys(this.list);
+			const randomIndex = Math.floor(Math.random() * providers.length);
 			return providers[randomIndex];
 		}
 		return this.currentProvider;
