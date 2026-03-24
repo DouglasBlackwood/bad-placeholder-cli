@@ -59,5 +59,5 @@ var generateRandomFileName = (fileNumber) => (
 		".jpg"
 	);
 for (i = 1; i <= cliOptions.number; i++) {
-	downloadPlaceHolder(image.getImgUrl(cliOptions.size), generateRandomFileName(i));
+	downloadPlaceHolder(image.getImageUrl(cliOptions.size), generateRandomFileName(i));
 }
