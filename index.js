@@ -1,7 +1,7 @@
 #! /usr/bin/env node
-var fr = require("follow-redirects");
-var http = fr.http;
-var https = fr.https;
+var followRedirects = require("follow-redirects");
+var http = followRedirects.http;
+var https = followRedirects.https;
 var fs = require("fs");
 var rdm = require("random-string");
 var img = require("./Image");
@@ -22,17 +22,11 @@ var downloadPlaceHolder = (a, b) => {
 			fileStream.close(() => {
 				
 				downloadedFileCounter++;
-				imagesList.push(b);
-				var pct = Math.ceil((downloadedFileCounter / cmd.number) * 100);
+				file_list.push(b);
+				var downloadProgress = Math.ceil((downloadedFileCounter / cmd.number) * 100);
 				rdl.cursorTo(process.stdout, 0);
 				process.stdout.write(
-					"Downloaded " +
-						downloadedFileCounter +
-						" of " +
-						cmd.number +
-						". [" +
-						pct +
-						" %]",
+					"Downloaded " + downloadedFileCounter + " of " + cmd.number + ". [" + downloadProgress + " %]",
 				);
 				if (downloadedFileCounter === cmd.number) {
 					console.info("\n" + cmd.number + " image(s) successfully downloaded");
@@ -53,7 +47,7 @@ var downloadPlaceHolder = (a, b) => {
 		});
 	}
 };
-fr.maxRedirects = 10;
+followRedirects.maxRedirects = 10;
 // Generate a randome file name
 var generateRandomFileName = (fileNumber) => (
 		"placeholder_" +
